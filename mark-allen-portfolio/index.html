@@ -1,577 +1,200 @@
 <!DOCTYPE html>
 <html lang="en" data-theme="dark">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-<meta name="description" content="Portfolio of Mark Allen Sarmiento — Computer Engineering student, developer, and hardware–software integration enthusiast." />
-<meta name="theme-color" content="#08121f" />
-<title>Mark Allen Sarmiento | Computer Engineering Portfolio</title>
-<style>
-:root{font-family:Inter,"Segoe UI",system-ui,-apple-system,sans-serif;color-scheme:dark;--bg:#07111e;--bg2:#0a1726;--surface:#101f31;--surface2:#10243a;--line:#253d57;--text:#eff6ff;--muted:#a4b7cd;--accent:#56a3ff;--accent2:#3178ed;--pale:#152b46;--soft:rgba(32,101,191,.16);--shadow:0 20px 60px rgba(0,0,0,.2);--control:#111f31}
-html[data-theme="light"]{color-scheme:light;--bg:#f2f6fb;--bg2:#eaf1f9;--surface:#fff;--surface2:#f6f9fe;--line:#d5e1ef;--text:#102239;--muted:#52677f;--accent:#2163be;--accent2:#2a70d0;--pale:#e7f0fd;--soft:rgba(53,116,200,.10);--shadow:0 14px 38px rgba(40,75,120,.08);--control:#fff}
-html[data-theme="slate"]{color-scheme:light;--bg:#e7eeee;--bg2:#dbe8e8;--surface:#f8fbfa;--surface2:#ecf3f1;--line:#c5d7d8;--text:#19383e;--muted:#5d777c;--accent:#26737b;--accent2:#328a90;--pale:#e0f0ee;--soft:rgba(39,115,120,.10);--shadow:0 14px 38px rgba(35,72,72,.08);--control:#f8fbfa}
-*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:18px}body{margin:0;background:var(--bg);color:var(--text);min-height:100vh;line-height:1.55;transition:background-color .25s,color .25s}button,input{font:inherit}button{cursor:pointer}a{color:inherit;text-decoration:none}a:focus-visible,button:focus-visible,input:focus-visible{outline:3px solid var(--accent);outline-offset:3px}img{max-width:100%;display:block}.icon{width:19px;height:19px;stroke:currentColor;stroke-width:1.9;fill:none;stroke-linecap:round;stroke-linejoin:round;flex:none}.icon.fill{fill:currentColor;stroke:none}.mini{color:var(--accent);font-size:10px;letter-spacing:.20em;text-transform:uppercase;font-weight:800}.muted{color:var(--muted)}.skip{position:absolute;top:-80px;left:10px;padding:10px;background:var(--surface);z-index:50}.skip:focus{top:10px}
-/* Layout */
-.sidebar{position:fixed;top:0;bottom:0;left:0;width:224px;z-index:20;padding:27px 15px 20px;background:var(--surface);border-right:1px solid var(--line);display:flex;flex-direction:column;gap:30px}
-.brand{display:flex;gap:12px;align-items:center;padding:4px 10px}.brand-logo{display:grid;place-items:center;width:45px;height:42px;font-size:24px;font-weight:950;letter-spacing:-.13em;color:var(--accent)}.brand-copy{line-height:1.32}.brand-copy strong{font-size:11px;letter-spacing:.06em;display:block}.brand-copy small{font-size:9px;letter-spacing:.11em;color:var(--muted)}
-.side-nav{display:flex;flex-direction:column;gap:7px}.side-nav a{display:flex;align-items:center;gap:13px;padding:10px 12px;font-size:13px;font-weight:650;border:1px solid transparent;border-radius:13px;color:var(--muted);white-space:nowrap;transition:background .2s,color .2s,border .2s}.side-nav a:hover,.side-nav a.active{background:var(--soft);border-color:var(--line);color:var(--text)}.nav-icon{width:35px;height:35px;border:1px solid var(--line);background:var(--pale);border-radius:11px;display:grid;place-items:center;color:var(--accent);flex:none}.sidebar-foot{margin-top:auto;border-top:1px solid var(--line);padding:17px 8px 0;color:var(--muted);font-size:11px}.sidebar-foot .socials{display:flex;gap:9px;margin-bottom:14px}.social-button{display:grid;place-items:center;width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:var(--pale);color:var(--text)}.social-button:hover{color:var(--accent);border-color:var(--accent)}
-.main{margin-left:224px;padding:0 clamp(16px,3vw,46px) 36px;max-width:1880px}.masthead{min-height:65px;display:flex;justify-content:space-between;align-items:center;gap:16px;border-bottom:1px solid var(--line);margin-bottom:18px}.masthead span{font-size:10px;font-weight:800;letter-spacing:.20em;color:var(--muted)}.live-status{display:flex;align-items:center;gap:9px;color:var(--muted);font-size:11px}.status-dot{width:7px;height:7px;background:#35c48a;border-radius:50%;box-shadow:0 0 0 4px rgba(53,196,138,.1)}
-.panel{background:var(--surface);border:1px solid var(--line);border-radius:19px;box-shadow:var(--shadow);min-width:0;padding:23px}.panel-title{display:flex;align-items:center;gap:11px;margin:0 0 17px;font-size:18px;letter-spacing:-.03em}.heading-icon{width:33px;height:33px;border-radius:10px;display:grid;place-items:center;background:var(--pale);color:var(--accent)}.panel p{color:var(--muted);font-size:13px;line-height:1.75;margin:0}.section-kicker{font-size:10px;font-weight:750;letter-spacing:.16em;color:var(--accent);text-transform:uppercase;margin-bottom:12px}
-/* Hero visual */
-.hero{position:relative;overflow:hidden;isolation:isolate;min-height:455px;padding:32px 275px 28px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;border:1px solid var(--line);border-radius:23px;background:radial-gradient(ellipse at 48% 5%,var(--soft),transparent 52%),linear-gradient(115deg,var(--surface),var(--bg2) 58%,var(--surface));margin-bottom:16px}
-.hero:before{content:"";position:absolute;inset:0;z-index:-1;opacity:.5;background:linear-gradient(90deg,transparent 0 45px,var(--line) 45px 46px,transparent 46px 100%),linear-gradient(transparent 0 45px,var(--line) 45px 46px,transparent 46px 100%);background-size:46px 46px;mask-image:linear-gradient(to bottom,black,transparent 85%)}
-.hero:after{content:"";position:absolute;inset:auto -50px -230px -50px;height:400px;z-index:-1;border:1px solid var(--line);border-radius:50%;box-shadow:0 0 0 45px var(--soft),0 0 0 100px rgba(55,111,190,.04)}
-.circuit{position:absolute;pointer-events:none;opacity:.7;width:230px;height:190px;border:1px solid var(--line);border-top:0;border-right:0;transform:skew(24deg);left:14px;top:25px}.circuit.right{transform:scaleX(-1) skew(24deg);left:auto;right:14px;top:auto;bottom:32px}.circuit:before,.circuit:after{content:"";position:absolute;width:7px;height:7px;border-radius:50%;background:var(--accent);box-shadow:0 0 14px var(--accent)}.circuit:before{bottom:-4px;left:30px}.circuit:after{top:45%;left:-4px}
-.photo-shell{width:173px;height:173px;position:relative;display:grid;place-items:center;margin:0 auto 17px;flex:none}.photo-shell:before,.photo-shell:after{content:"";position:absolute;border-radius:50%;inset:-10px;border:1px solid var(--accent);opacity:.7}.photo-shell:after{inset:-18px;border-color:var(--line);border-left-color:var(--accent);border-right-color:var(--accent)}.photo-ring{width:100%;height:100%;border-radius:50%;border:5px solid var(--accent);box-shadow:0 0 0 5px var(--pale),0 0 35px var(--soft);overflow:hidden;background:#dce4ef}.photo-ring img{width:100%;height:100%;object-fit:cover;object-position:center 22%;aspect-ratio:1}
-.hero .eyebrow{font-size:11px;letter-spacing:.33em;color:var(--accent);font-weight:750;text-transform:uppercase;margin:7px 0}.hero h1{font-size:clamp(35px,3.6vw,57px);line-height:1.05;letter-spacing:-.06em;margin:8px 0 12px;font-weight:860}.hero h1 span{color:var(--accent)}.hero .role{font-size:12px;letter-spacing:.32em;font-weight:700;text-transform:uppercase;margin:0 0 13px}.hero .intro{max-width:580px;font-size:13px;line-height:1.65;color:var(--muted);margin:0 auto}.hero-actions{display:flex;gap:9px;justify-content:center;flex-wrap:wrap;margin-top:19px}
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;min-height:41px;padding:9px 14px;border:1px solid var(--line);border-radius:11px;background:var(--surface2);font-size:12px;font-weight:760;color:var(--text);transition:transform .2s,border .2s,background .2s}.btn:hover{transform:translateY(-2px);border-color:var(--accent)}.btn.primary{background:var(--accent2);border-color:var(--accent2);color:white}.btn .icon{width:16px;height:16px}
-/* ambience + music control */
-.ambience{position:absolute;top:15px;right:15px;display:grid;gap:10px;width:235px;text-align:left;z-index:2}.widget{background:var(--control);border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow);padding:13px}.widget h3{font-size:11px;letter-spacing:.02em;margin:0 0 10px;display:flex;align-items:center;gap:8px}.theme-controls{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}.theme-btn{color:var(--muted);background:transparent;border:1px solid transparent;border-radius:11px;min-width:0;padding:7px 3px 6px;font-size:10px;display:flex;flex-direction:column;align-items:center;gap:6px}.theme-btn[aria-pressed="true"]{border-color:var(--accent);color:var(--text);background:var(--soft)}.theme-dot{display:block;width:23px;height:23px;border-radius:50%;border:2px solid var(--line)}.theme-dot.light{background:#fafcff}.theme-dot.dark{background:#071322}.theme-dot.slate{background:#8aa3a5}
-.music-top{display:flex;align-items:center;justify-content:space-between;gap:8px}.music-name{font-size:12px;font-weight:800;line-height:1.3}.music-name small{display:block;color:var(--muted);font-weight:500;font-size:10px}.music-btn{width:37px;height:37px;display:grid;place-items:center;border:0;border-radius:50%;background:var(--accent2);color:white;flex:none}.volume{display:flex;align-items:center;gap:9px;margin-top:11px;color:var(--muted)}.volume .icon{width:15px;height:15px}.volume input{width:100%;min-width:0;accent-color:var(--accent)}
-/* grid */
-.dashboard{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:15px}
-.skills-mid{margin:0 0 15px}.span-8{grid-column:span 8}.span-7{grid-column:span 7}.span-6{grid-column:span 6}.span-5{grid-column:span 5}.span-4{grid-column:span 4}.span-12{grid-column:span 12}
-.about-layout{display:grid;grid-template-columns:1.2fr .95fr;gap:26px}.about-layout>div+div{border-left:1px solid var(--line);padding-left:24px}.info-row{display:flex;align-items:center;gap:11px;margin:0 0 11px;font-size:12px}.info-row .icon{color:var(--accent);width:17px;height:17px}.info-row a{overflow-wrap:anywhere}.info-row a:hover{color:var(--accent)}.quick-stats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.stat{border:1px solid var(--line);border-radius:13px;background:var(--surface2);padding:15px}.stat strong{display:block;font-size:23px;color:var(--accent)}.stat span{font-size:11px;color:var(--muted)}
-.project-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}.project{background:var(--surface2);border:1px solid var(--line);border-radius:15px;overflow:hidden;display:flex;flex-direction:column}.project-image{position:relative;display:block;overflow:hidden;background:var(--pale)}.project-image img{height:180px;width:100%;object-fit:cover;transition:transform .25s}.project-image:hover img{transform:scale(1.045)}.open-photo{position:absolute;right:8px;top:8px;font-size:10px;font-weight:750;padding:6px 9px;background:rgba(6,21,41,.86);border-radius:8px;color:white}.project-content{padding:14px;display:flex;flex-direction:column;flex:1}.project-content h3{font-size:14px;margin:0 0 7px;letter-spacing:-.02em}.project-content p{font-size:12px;line-height:1.65;flex:1}.tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}.tag{background:var(--pale);border:1px solid var(--line);border-radius:7px;padding:4px 7px;color:var(--muted);font-size:10px}.project-actions{display:flex;gap:7px;flex-wrap:wrap;margin-top:11px}.project-actions a{display:inline-flex;align-items:center;gap:4px;background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:6px 8px;font-size:10px;color:var(--text);font-weight:720}.project-actions a:hover{border-color:var(--accent);color:var(--accent)}
-.section-head{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:16px}.section-head .panel-title{margin:0}.slider-actions{display:flex;gap:8px}.slider-arrow{display:grid;place-items:center;width:33px;height:33px;background:var(--surface2);color:var(--accent);border:1px solid var(--line);border-radius:9px}.slider-arrow:hover{border-color:var(--accent)}.skill-scroll{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;overscroll-behavior-x:contain;gap:12px;padding:4px 1px 16px;scrollbar-color:var(--accent) var(--pale);scrollbar-width:thin}.skill-group{flex:0 0 clamp(235px,33%,350px);scroll-snap-align:start;border-radius:14px;border:1px solid var(--line);background:var(--surface2);padding:17px}.skill-group h3{font-size:13px;margin:0 0 13px;display:flex;gap:8px;align-items:center}.skill-group .tag{display:inline-flex;white-space:normal;padding:7px 9px;color:var(--text);background:var(--surface)}.skill-tip{font-size:11px;color:var(--muted);margin:8px 0 0}
-.edu{position:relative;border-left:2px solid var(--line);margin-left:5px;padding:0 0 18px 19px}.edu:last-child{padding-bottom:0}.edu:before{content:"";position:absolute;left:-6px;top:4px;width:10px;height:10px;border-radius:50%;background:var(--accent)}.edu time{font-size:10px;letter-spacing:.07em;color:var(--accent)}.edu strong{font-size:12px;display:block;margin:3px 0}.edu p{font-size:12px}.experience-list{display:grid;grid-template-columns:1fr 1fr;gap:14px}.exp{border-top:1px solid var(--line);padding-top:12px}.exp time{font-size:10px;color:var(--accent)}.exp h3{font-size:13px;margin:4px 0}.exp p{font-size:12px}.award-row{display:grid;grid-template-columns:190px 1fr;gap:17px;align-items:center}.award-row img{width:100%;border:1px solid var(--line);border-radius:9px}.award-row h3{font-size:14px;margin:3px 0 8px}.award-row .btn{margin-top:13px}.contact-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}.contact-actions a{overflow-wrap:anywhere}.footer{margin:20px 0 0;border-top:1px solid var(--line);padding:22px 4px;color:var(--muted);font-size:11px;display:flex;flex-wrap:wrap;gap:10px;justify-content:space-between}
-/* Image lightbox */
-.viewer{position:fixed;inset:0;max-width:none;max-height:none;width:100vw;height:100vh;margin:0;padding:18px;border:0;background:rgba(3,10,20,.95);color:white;overflow:auto}.viewer::backdrop{background:rgba(3,10,20,.95)}.viewer-inner{min-height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:15px}.viewer-head{width:min(100%,1050px);display:flex;justify-content:space-between;align-items:center;gap:16px}.viewer-close,.viewer-arrow{color:#fff;background:#182b43;border:1px solid #486382;border-radius:11px;min-width:42px;min-height:42px;padding:7px 11px}.viewer-row{display:flex;justify-content:center;align-items:center;gap:9px;width:100%}.viewer img{object-fit:contain;max-width:min(100%,1000px);max-height:72vh;min-width:0;border-radius:10px}.viewer p{font-size:12px;color:#c2d4e9;text-align:center}.viewer a{font-size:12px;border:1px solid #486382;background:#182b43;padding:9px 12px;border-radius:8px}body.viewer-open{overflow:hidden}
-/* Desktop to tablet */
-@media(min-width:1500px){.hero{padding-left:260px;padding-right:260px}.project-image img{height:215px}}
-@media(max-width:1250px){.sidebar{width:188px}.main{margin-left:188px;padding-left:20px;padding-right:20px}.hero{padding-left:35px;padding-right:265px;align-items:flex-start;text-align:left;min-height:410px}.hero .intro{margin-left:0}.hero-actions{justify-content:flex-start}.hero .photo-shell{margin-left:15px}.project-image img{height:158px}.about-layout{grid-template-columns:1fr}.about-layout>div+div{padding:17px 0 0;border-left:0;border-top:1px solid var(--line)}.sidebar .brand-copy strong{font-size:10px}}
-@media(max-width:1050px){.sidebar{width:76px;padding:20px 9px}.sidebar .brand{padding:0;justify-content:center}.brand-copy,.side-nav a span.nav-label,.sidebar-foot p{display:none}.side-nav a{justify-content:center;padding:9px 4px}.side-nav .nav-icon{width:39px;height:39px}.sidebar-foot .socials{flex-direction:column;align-items:center}.main{margin-left:76px}.span-8,.span-7{grid-column:span 12}.span-4,.span-5{grid-column:span 6}.project-image img{height:180px}.hero{align-items:center;text-align:center;padding-left:32px;padding-right:265px}.hero .photo-shell{margin-left:auto;margin-right:auto}.hero .intro{margin:auto}.hero-actions{justify-content:center}.experience-list{grid-template-columns:1fr}}
-/* Tablet: all panels stack conveniently */
-@media(max-width:780px){.main{padding-left:15px;padding-right:15px}.hero{padding:25px 18px 22px;display:block;text-align:center;min-height:0}.hero .intro{max-width:560px}.ambience{position:relative;width:100%;max-width:520px;right:auto;top:auto;grid-template-columns:1fr 1fr;margin:24px auto 0}.photo-shell{width:155px;height:155px}.hero .role{letter-spacing:.2em}.span-4,.span-5{grid-column:span 12}.project-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.project-grid .project:last-child{grid-column:span 2;display:grid;grid-template-columns:40% 60%}.project-grid .project:last-child .project-image img{height:100%;min-height:210px}.project-grid .project:last-child .project-image{height:100%}.experience-list{grid-template-columns:repeat(2,1fr)}.about-layout{grid-template-columns:1fr 1fr}.about-layout>div+div{padding:0 0 0 18px;border-left:1px solid var(--line);border-top:0}}
-/* Phone: labeled nav at bottom, no squeezed desktop columns */
-@media(max-width:600px){html{scroll-padding-top:16px}.sidebar{top:auto;left:8px;right:8px;bottom:max(8px,env(safe-area-inset-bottom));height:auto;width:auto;max-width:560px;margin:auto;padding:7px 8px;border:1px solid var(--line);border-radius:18px;backdrop-filter:blur(20px);background:var(--surface);box-shadow:0 12px 45px rgba(0,0,0,.28);display:block;overflow:hidden}.sidebar .brand,.sidebar-foot{display:none}.side-nav{display:flex;flex-direction:row;overflow-x:auto;gap:4px;scrollbar-width:none;-webkit-overflow-scrolling:touch;scroll-snap-type:x proximity}.side-nav::-webkit-scrollbar{display:none}.side-nav a{min-width:68px;flex-direction:column;gap:3px;font-size:10px;flex-shrink:0;padding:5px 5px;border-radius:11px;scroll-snap-align:start}.side-nav a span.nav-label{display:block;text-align:center}.side-nav .nav-icon{width:29px;height:27px;border:0;background:transparent}.side-nav .icon{width:17px;height:17px}.main{margin:0;padding:0 12px 100px}.masthead{min-height:56px;margin-bottom:12px}.masthead span{font-size:9px;letter-spacing:.1em}.hero{padding:26px 13px 20px;border-radius:18px}.photo-shell{width:144px;height:144px;margin:4px auto 15px}.hero h1{font-size:clamp(30px,8vw,43px)}.hero .role{font-size:10px;letter-spacing:.17em}.hero .intro{font-size:12px}.hero-actions{gap:7px}.hero-actions .btn{font-size:11px;min-height:40px;padding:8px 10px}.ambience{grid-template-columns:1fr 1fr;gap:8px}.widget{padding:10px}.widget h3{font-size:10px}.theme-btn{font-size:9px}.theme-dot{width:20px;height:20px}.music-name{font-size:10px}.music-name small{font-size:9px}.music-btn{width:32px;height:32px}.panel{padding:17px;border-radius:15px}.panel-title{font-size:16px}.dashboard{gap:11px}.about-layout{grid-template-columns:1fr}.about-layout>div+div{border-left:0;border-top:1px solid var(--line);padding:14px 0 0}.project-grid{grid-template-columns:1fr}.project-grid .project:last-child{display:flex;grid-column:auto}.project-grid .project:last-child .project-image img{height:190px;min-height:0}.project-image img{height:195px}.skill-group{flex-basis:min(83vw,315px)}.experience-list{grid-template-columns:1fr}.award-row{grid-template-columns:1fr}.award-row img{max-height:200px;object-fit:contain}.viewer{padding:8px}.viewer img{max-height:65vh}.viewer-row{gap:4px}.viewer-arrow{padding:5px;min-width:35px}.footer{padding-bottom:100px}}
-@media(max-width:360px){.main{padding-left:8px;padding-right:8px}.hero h1{font-size:29px}.ambience{grid-template-columns:1fr}.side-nav a{min-width:63px}.btn{padding:8px 10px}.panel{padding:14px}}
-@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation:none!important;transition:none!important}}
-
-/* Enhanced touch-first project and technical skills carousels */
-.showcase-panel,.skills-showcase{position:relative;overflow:hidden}
-.showcase-panel:before,.skills-showcase:before{content:"";pointer-events:none;position:absolute;top:-155px;right:-95px;width:310px;height:310px;border-radius:50%;background:radial-gradient(circle,var(--soft),transparent 72%);opacity:.9}
-.showcase-head{position:relative;z-index:1;align-items:flex-start;margin-bottom:18px}
-.showcase-head .panel-title,.skills-showcase .panel-title{margin-bottom:5px}
-.showcase-subtitle{color:var(--muted);font-size:12px!important;line-height:1.5!important;margin:1px 0 0!important}
-.carousel-tools,.slider-actions{display:flex;align-items:center;gap:9px;flex-shrink:0}
-.carousel-count,.skills-position{font-variant-numeric:tabular-nums;font-size:13px;letter-spacing:.05em;font-weight:850;color:var(--text);min-width:52px;text-align:center}
-.carousel-count span{color:var(--muted);font-weight:500}
-.slider-arrow.arrow-large{position:relative;width:42px;height:42px;font-size:20px;font-weight:650;border-radius:13px;color:var(--text);background:var(--surface2);transition:background .2s,border-color .2s,transform .2s,opacity .2s,box-shadow .2s}
-.slider-arrow.arrow-large:not(:disabled):hover{background:var(--pale);border-color:var(--accent);color:var(--accent);transform:translateY(-2px);box-shadow:0 7px 20px var(--soft)}
-.slider-arrow:disabled{opacity:.28;cursor:not-allowed;box-shadow:none}
-.project-carousel-shell{position:relative;min-width:0}
-.project-carousel-shell:after{content:"";position:absolute;right:0;top:0;bottom:10px;width:25px;background:linear-gradient(90deg,transparent,var(--surface));pointer-events:none;opacity:.65;border-radius:0 13px 13px 0}
-/* One or two full slides and a deliberately visible edge of the next slide */
-.project-grid{display:flex;gap:17px;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;scroll-padding-inline:2px;scroll-behavior:smooth;overscroll-behavior-x:contain;-webkit-overflow-scrolling:touch;padding:5px 6px 20px 2px;scrollbar-width:none;touch-action:pan-x pan-y}
-.project-grid::-webkit-scrollbar{display:none}
-.project-grid .project,.project-grid .project:last-child{box-sizing:border-box;flex:0 0 66%;min-width:0;max-width:none;display:flex;flex-direction:column;scroll-snap-align:start;scroll-snap-stop:always;position:relative;overflow:hidden;background:linear-gradient(165deg,var(--surface2),var(--surface));border:1px solid var(--line);border-radius:17px;box-shadow:0 7px 20px rgba(0,0,0,.06);transform:translateY(0);transition:transform .35s cubic-bezier(.2,.75,.25,1),box-shadow .35s,border-color .3s,background .3s,opacity .3s}
-.project-grid .project:after{content:"";pointer-events:none;position:absolute;inset:0 0 auto;height:3px;background:linear-gradient(90deg,transparent,var(--accent),transparent);opacity:0;transition:opacity .3s}
-.project-grid .project.is-current,.project-grid .project:hover{border-color:color-mix(in srgb,var(--accent) 55%,var(--line));box-shadow:0 15px 32px var(--soft)}
-.project-grid .project.is-current:after,.project-grid .project:hover:after{opacity:1}
-.project-grid .project:hover{transform:translateY(-4px)}
-.project-grid .project-image,.project-grid .project:last-child .project-image{height:200px;min-height:0;flex:0 0 auto;overflow:hidden;position:relative}
-.project-grid .project-image img,.project-grid .project:last-child .project-image img{height:100%;min-height:0;width:100%;object-fit:cover;transform:scale(1);transition:transform .6s cubic-bezier(.2,.7,.2,1),filter .35s}
-.project-grid .project:hover .project-image img{transform:scale(1.07);filter:saturate(1.15)}
-#projectsSlider .project:first-child .project-image img{object-position:center 68%}
-.project-grid .project-image:after{content:"";pointer-events:none;position:absolute;inset:auto 0 0;height:65px;background:linear-gradient(transparent,rgba(3,13,28,.25))}
-.open-photo{z-index:1;backdrop-filter:blur(10px);transition:transform .2s,background .2s}
-.project-grid .project-image:hover .open-photo{transform:translateY(-2px);background:var(--accent2)}
-.project-grid .project-content{padding:17px;gap:3px}
-.project-grid .project-content h3{font-size:15px;line-height:1.35}
-.project-grid .project-actions a{transition:background .2s,color .2s,border-color .2s,transform .2s}
-.project-grid .project-actions a:hover{transform:translateY(-2px);background:var(--pale)}
-.carousel-footer{display:flex;align-items:center;justify-content:space-between;gap:15px;margin-top:4px}
-.carousel-progress{height:4px;width:min(180px,30%);min-width:80px;background:var(--pale);border-radius:99px;overflow:hidden}
-.carousel-progress span,.skill-progress span{height:100%;width:33.3333%;background:linear-gradient(90deg,var(--accent2),var(--accent));border-radius:99px;display:block;transition:width .3s ease}
-.carousel-dots{display:flex;gap:7px;align-items:center}
-.carousel-dots button{width:9px;height:9px;padding:0;background:var(--line);border:0;border-radius:999px;transition:width .25s,background .25s,box-shadow .25s}
-.carousel-dots button[aria-current="true"]{width:26px;background:var(--accent);box-shadow:0 0 0 3px var(--soft)}
-.carousel-hint{font-size:11px!important;color:var(--muted);margin:0!important;white-space:nowrap}
-/* Skills: lively but calm transitions, without collapsing any information. */
-.skill-scroll{gap:16px;padding:8px 4px 19px;scroll-behavior:smooth;scroll-padding-inline:4px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
-.skill-scroll::-webkit-scrollbar{display:none}
-.skills-showcase .section-head{margin-bottom:12px}.skills-showcase .showcase-subtitle{margin:3px 0 0;color:var(--muted);font-size:12px}.skills-position{font-size:11px;font-weight:750;color:var(--muted);min-width:58px;text-align:right}.skill-scroll{gap:14px;padding:10px 2px 12px;align-items:stretch;scroll-padding-inline:2px}.skill-group{flex:0 0 106px;min-width:106px;scroll-snap-align:start;border-radius:18px;border:1px solid var(--line);background:linear-gradient(180deg,var(--surface2),rgba(9,22,36,.55));padding:14px 10px 12px;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;gap:10px;min-height:132px;position:relative;overflow:hidden;box-shadow:inset 0 1px 0 rgba(255,255,255,.03),0 10px 22px rgba(0,0,0,.14);transition:transform .22s ease,border-color .22s ease,box-shadow .22s ease,background .22s ease}.skill-group::before{content:"";position:absolute;inset:auto -12px -34px;height:60px;background:radial-gradient(circle,var(--soft),transparent 72%);opacity:.8}.skill-group:hover,.skill-group.is-current{transform:translateY(-3px);border-color:var(--accent);box-shadow:0 0 0 1px rgba(86,163,255,.15),0 16px 30px rgba(0,0,0,.18)}.skill-badge{width:56px;height:56px;border-radius:18px;display:grid;place-items:center;border:1px solid rgba(255,255,255,.08);box-shadow:inset 0 1px 0 rgba(255,255,255,.05),0 8px 18px rgba(0,0,0,.16);font-size:20px;font-weight:900;letter-spacing:-.04em;color:#fff;position:relative;z-index:1}.skill-badge svg{width:28px;height:28px;stroke:none;fill:currentColor}.skill-badge.text{font-size:18px}.skill-name{font-size:12px;line-height:1.35;text-align:center;color:var(--text);font-weight:700;margin:0;min-height:34px;display:flex;align-items:center;justify-content:center}.skill-meta{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.12em;text-align:center}.skill-footer{display:flex;align-items:center;justify-content:space-between;gap:15px;margin-top:4px}.skill-tip{font-size:11px;color:var(--muted);margin:0}.skill-progress{flex:1;min-width:110px;height:7px;border-radius:999px;background:var(--pale);overflow:hidden}.skill-progress span{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--accent),var(--accent2));border-radius:inherit;transition:width .25s ease}.skill-group:nth-child(1) .skill-badge{background:linear-gradient(135deg,#2d85ff,#5fb5ff)}.skill-group:nth-child(2) .skill-badge{background:linear-gradient(135deg,#204872,#4ca1ff)}.skill-group:nth-child(3) .skill-badge{background:linear-gradient(135deg,#93551a,#f7a033)}.skill-group:nth-child(4) .skill-badge{background:linear-gradient(135deg,#d48b1f,#ffce4f)}.skill-group:nth-child(5) .skill-badge{background:linear-gradient(135deg,#d84a2b,#ff7a59)}.skill-group:nth-child(6) .skill-badge{background:linear-gradient(135deg,#1f6ccb,#5aa3ff)}.skill-group:nth-child(7) .skill-badge{background:linear-gradient(135deg,#6e5ad7,#9c8cff)}.skill-group:nth-child(8) .skill-badge{background:linear-gradient(135deg,#7c52ee,#b687ff)}.skill-group:nth-child(9) .skill-badge{background:linear-gradient(135deg,#2c8e58,#4ed388)}.skill-group:nth-child(10) .skill-badge{background:linear-gradient(135deg,#0f8b7c,#31c8b7)}.skill-group:nth-child(11) .skill-badge{background:linear-gradient(135deg,#d84c35,#ff785d)}.skill-group:nth-child(12) .skill-badge{background:linear-gradient(135deg,#0f1115,#30363d)}.skill-group:nth-child(13) .skill-badge{background:linear-gradient(135deg,#1866b3,#29a3dd)}.skill-group:nth-child(14) .skill-badge{background:linear-gradient(135deg,#2d8d74,#60c9a8)}
-@media(max-width:900px){.skill-group{flex-basis:98px;min-width:98px;min-height:124px}.skill-badge{width:52px;height:52px}.skill-name{font-size:11px}}
-@media(max-width:560px){.skills-showcase .section-head{align-items:flex-start}.slider-actions{align-self:flex-end}.skill-group{flex-basis:94px;min-width:94px;padding:12px 8px 10px}.skill-badge{width:48px;height:48px;border-radius:15px}.skill-name{font-size:10px;min-height:30px}.skill-meta{font-size:9px}.skill-footer{flex-direction:column;align-items:flex-start}}
-.skill-group{position:relative;isolation:isolate;overflow:hidden;flex:0 0 66%;border-radius:18px;padding:20px 18px;background:linear-gradient(135deg,var(--surface2),var(--surface));transition:transform .32s cubic-bezier(.2,.75,.2,1),box-shadow .32s,border-color .32s,background .32s}
-.skill-group:before{content:"";position:absolute;pointer-events:none;z-index:-1;width:175px;height:175px;right:-100px;top:-96px;border-radius:50%;background:var(--soft);transform:scale(.8);transition:transform .5s}
-.skill-group.is-current,.skill-group:hover{border-color:color-mix(in srgb,var(--accent) 55%,var(--line));box-shadow:0 14px 30px var(--soft);transform:translateY(-3px)}
-.skill-group:hover:before,.skill-group.is-current:before{transform:scale(1.5)}
-.skill-card-top{display:flex;justify-content:space-between;align-items:center;margin:0 0 15px}
-.skill-number{font-size:10px;letter-spacing:.18em;text-transform:uppercase;font-weight:800;color:var(--accent)}
-.skill-spark{font-size:16px;color:var(--accent);opacity:.6;transition:transform .5s,opacity .3s}
-.skill-group:hover .skill-spark,.skill-group.is-current .skill-spark{transform:rotate(45deg) scale(1.2);opacity:1}
-.skill-group h3{font-size:15px;margin-bottom:15px}
-.skill-group .tag{transition:background .22s,border-color .22s,color .22s,transform .22s}
-.skill-group .tag:hover{background:var(--pale);border-color:var(--accent);color:var(--accent);transform:translateY(-2px)}
-.skill-footer{display:flex;align-items:center;justify-content:space-between;gap:12px}
-.skill-footer .skill-tip{flex:1;font-size:11px;margin:5px 0 0}
-.skill-progress{width:125px;height:4px;border-radius:99px;background:var(--pale);overflow:hidden;flex-shrink:0}
-/* Gentle entrance transitions once each section is in view. */
-@keyframes revealUp{from{opacity:.5;transform:translateY(13px)}to{opacity:1;transform:translateY(0)}}
-.showcase-panel.revealed .showcase-head,.skills-showcase.revealed .section-head{animation:revealUp .6s ease both}
-@media (min-width:1450px){.project-grid .project,.project-grid .project:last-child{flex-basis:64%}.project-grid .project-image,.project-grid .project:last-child .project-image{height:225px}}
-@media (max-width:1050px){.project-grid .project,.project-grid .project:last-child{flex-basis:61%}}
-@media (max-width:780px){.project-grid .project,.project-grid .project:last-child{flex-basis:72%}.project-grid .project:last-child .project-image{height:200px;min-height:0}}
-@media (max-width:600px){
- .showcase-head,.skills-showcase .section-head{align-items:center}
- .showcase-head .panel-title,.skills-showcase .panel-title{font-size:16px}
- .showcase-subtitle{font-size:11px!important}
- .carousel-tools,.slider-actions{gap:5px}
- .slider-arrow.arrow-large{width:35px;height:35px;border-radius:10px;font-size:18px}
- .carousel-count,.skills-position{font-size:11px;min-width:46px}
- .project-grid{gap:12px;padding-bottom:16px}
- .project-grid .project,.project-grid .project:last-child{flex-basis:90%}
- .project-grid .project-image,.project-grid .project:last-child .project-image{height:190px}
- .project-grid .project-content{padding:14px}
- .project-grid .project-content h3{font-size:14px}
- .carousel-footer{gap:8px}
- .carousel-hint{font-size:10px!important}
- .carousel-progress{width:18%;min-width:38px}
- .skill-group{flex-basis:min(86vw,325px);padding:17px}
- .skill-progress{width:75px}
-}
-@media(max-width:380px){.carousel-hint{display:none}.showcase-subtitle{font-size:10px!important}.project-grid .project,.project-grid .project:last-child{flex-basis:91%}.slider-arrow.arrow-large{width:33px;height:33px}}
-@media(prefers-reduced-motion:reduce){.project-grid,.skill-scroll{scroll-behavior:auto}.project-grid .project,.project-grid .project-image img,.skill-group,.skill-group .tag,.skill-spark,.carousel-progress span,.skill-progress span{transition:none!important}.project-grid .project:hover,.skill-group:hover,.skill-group.is-current{transform:none}.showcase-panel.revealed .showcase-head,.skills-showcase.revealed .section-head{animation:none}}
-
-
-/* Tools & Technologies — compact icon rail matching the visual reference. */
-.skills-showcase .skill-scroll{display:flex;align-items:stretch;gap:9px;overflow-x:auto;scroll-snap-type:x proximity;scroll-padding-inline:4px;min-width:0;padding:12px 2px 18px;touch-action:pan-x pan-y}
-.skills-showcase .skill-group{
-  flex:0 0 98px;min-width:98px;max-width:98px;min-height:114px;
-  display:flex;flex-direction:column;align-items:center;justify-content:flex-start;gap:7px;
-  padding:5px 3px 8px;border:1px solid transparent;border-radius:15px;background:transparent;
-  box-shadow:none;transform:none;scroll-snap-align:start;transition:transform .2s,border-color .2s,background .2s
-}
-.skills-showcase .skill-group::before{display:none}
-.skills-showcase .skill-group:hover,.skills-showcase .skill-group.is-current{transform:translateY(-2px);border-color:var(--line);background:var(--soft);box-shadow:none}
-.skills-showcase .skill-badge{width:59px;height:59px;flex:0 0 59px;border-radius:16px;background:var(--surface2);border:1px solid var(--line);box-shadow:0 8px 18px rgba(0,0,0,.14)}
-.skills-showcase .skill-name{display:block;text-align:center;color:var(--text);font-size:11px;font-weight:700;line-height:1.22;min-height:27px;margin:0;overflow-wrap:anywhere}
-.skills-showcase .skill-meta{font-size:9px;letter-spacing:.05em;text-transform:none;color:var(--muted);line-height:1.12}
-.skills-showcase .skill-group:nth-child(n) .skill-badge{filter:saturate(.95)}
-.skills-showcase .skill-footer{margin-top:0}
-/* Restored detailed résumé-based Technical Skills container, separate from the icon rail. */
-.competency-section{overflow:hidden;position:relative}
-.competency-section:before{content:"";position:absolute;pointer-events:none;right:-145px;top:-170px;width:300px;height:300px;border-radius:50%;background:radial-gradient(circle,var(--soft),transparent 72%)}
-.competency-heading{position:relative}
-.competency-heading .panel-title{margin-bottom:5px}
-.competency-rail{position:relative;display:flex;gap:15px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;scroll-padding-inline:2px;overscroll-behavior-x:contain;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding:6px 2px 15px;touch-action:pan-x pan-y}
-.competency-rail::-webkit-scrollbar{display:none}
-.competency-card{scroll-snap-align:start;flex:0 0 clamp(280px,44%,530px);min-width:0;min-height:264px;padding:21px;border:1px solid var(--line);border-radius:18px;background:linear-gradient(145deg,var(--surface2),var(--surface));transition:transform .25s ease,border-color .25s ease,box-shadow .25s ease}
-.competency-card:hover,.competency-card.is-current{border-color:var(--accent);box-shadow:0 10px 32px var(--soft)}
-.competency-card:hover{transform:translateY(-3px)}
-.competency-header{display:flex;align-items:center;justify-content:space-between;gap:12px}
-.competency-symbol{height:41px;width:41px;display:grid;place-items:center;border:1px solid var(--line);border-radius:13px;background:var(--pale);color:var(--accent)}
-.competency-id{font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--accent);font-weight:800}
-.competency-card h3{font-size:16px;font-weight:760;margin:15px 0 13px;color:var(--text)}
-.competency-card .tags{display:flex;gap:8px;flex-wrap:wrap}
-.competency-card .tag{font-size:11px;line-height:1.4;white-space:normal;padding:7px 11px;background:var(--pale);color:var(--text);border:1px solid var(--line);transition:background .2s,border-color .2s}
-.competency-card .tag:hover{border-color:var(--accent);background:var(--soft)}
-.competency-hint{font-size:11px!important;color:var(--muted);margin:0!important}
-@media(max-width:760px){
- .competency-card{flex-basis:min(84vw,360px);padding:16px;min-height:250px}
- .competency-heading{align-items:center}
- .skills-showcase .skill-group{flex-basis:86px;min-width:86px;max-width:86px}
- .skills-showcase .skill-badge{height:51px;width:51px;flex-basis:51px}
- .skills-showcase .skill-name{font-size:10px}
-}
-@media(max-width:390px){.competency-card{flex-basis:91%;min-width:0}.skills-showcase .skill-group{flex-basis:80px;min-width:80px;max-width:80px}}
-@media(prefers-reduced-motion:reduce){.competency-rail{scroll-behavior:auto}.competency-card,.skills-showcase .skill-group{transition:none!important}}
-
-/* Bundled vector brand logos for Tools & Technologies */
-.skills-showcase .skill-badge.brand-logo{display:grid;place-items:center;background:var(--surface2);border:1px solid var(--line);filter:none;overflow:hidden;padding:12px;box-shadow:0 10px 24px rgba(0,0,0,.17),inset 0 1px 0 rgba(255,255,255,.04);transition:transform .25s ease,border-color .25s ease,box-shadow .25s ease}
-.skills-showcase .skill-badge.brand-logo img{width:100%;height:100%;display:block;object-fit:contain;filter:drop-shadow(0 3px 5px rgba(0,0,0,.1));transition:transform .25s ease}
-.skills-showcase .skill-group:hover .brand-logo,.skills-showcase .skill-group.is-current .brand-logo{transform:translateY(-2px);border-color:var(--accent);box-shadow:0 8px 24px var(--soft),0 0 0 1px var(--accent)}
-.skills-showcase .skill-group:hover .brand-logo img{transform:scale(1.10)}
-@media(max-width:760px){.skills-showcase .skill-badge.brand-logo{padding:10px}}
-
-/* Full-page engineering atmosphere — formerly limited to the hero/profile card. */
-html { background:var(--bg); }
-body {
-  background-color:var(--bg);
-  background-image:
-    radial-gradient(ellipse 70% 42% at 47% 0%,var(--soft),transparent 78%),
-    radial-gradient(ellipse 50% 40% at 100% 60%,var(--soft),transparent 82%),
-    linear-gradient(115deg,var(--surface) 0%,var(--bg2) 55%,var(--surface) 100%);
-  background-attachment:fixed;
-  background-repeat:no-repeat;
-}
-body::before {
-  content:"";
-  position:fixed;
-  inset:0;
-  z-index:0;
-  pointer-events:none;
-  opacity:.38;
-  background-image:
-    linear-gradient(90deg,transparent calc(100% - 1px),var(--line) 0),
-    linear-gradient(transparent calc(100% - 1px),var(--line) 0);
-  background-size:47px 47px;
-  mask-image:linear-gradient(to bottom,rgba(0,0,0,.85),rgba(0,0,0,.35) 65%,transparent);
-}
-/* The site content remains above the decorative page background. */
-.main {position:relative;z-index:1}
-/* Remove the hero's separate panel and reuse its atmosphere across the entire page. */
-.hero {
-  background:transparent;
-  border:0;
-  border-radius:0;
-  box-shadow:none;
-  overflow:visible;
-  isolation:auto;
-}
-.hero::before,.hero::after { content:none;display:none; }
-/* Keep the hero's circuit corners subtle without a box outline. */
-.hero .circuit {opacity:.48}
-@media(max-width:780px) {
-  .hero {padding-top:35px;padding-bottom:28px}
-  .hero .circuit {display:none}
-}
-@media(max-width:600px) {
-  body {background-attachment:scroll}
-  body::before {background-size:36px 36px;opacity:.24}
-  .hero {padding:26px 12px 28px}
-}
-
-</style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#070e19">
+  <meta name="description" content="Mark Allen Sarmiento — Computer Engineering student developing embedded systems, web applications, and practical engineering solutions.">
+  <title>Mark Allen Sarmiento | Engineering Desk</title>
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <link rel="stylesheet" href="styles.css">
+  <script defer src="script.js"></script>
 </head>
 <body>
-<!-- Icons are embedded: no internet connection or icon library is required. -->
-<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="position:absolute;width:0;height:0;overflow:hidden"><defs>
-<symbol id="ic-home" viewBox="0 0 24 24"><path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1h-5v-7H9v7H4a1 1 0 0 1-1-1z"/></symbol>
-<symbol id="ic-user" viewBox="0 0 24 24"><circle cx="12" cy="7" r="4"/><path d="M4 21v-2a8 8 0 0 1 16 0v2"/></symbol>
-<symbol id="ic-grid" viewBox="0 0 24 24"><rect x="3" y="3" width="8" height="8" rx="1"/><rect x="13" y="3" width="8" height="8" rx="1"/><rect x="3" y="13" width="8" height="8" rx="1"/><rect x="13" y="13" width="8" height="8" rx="1"/></symbol>
-<symbol id="ic-school" viewBox="0 0 24 24"><path d="m2 9 10-6 10 6-10 6zM6 12v6c4 4 8 4 12 0v-6"/></symbol>
-<symbol id="ic-cpu" viewBox="0 0 24 24"><rect x="6" y="6" width="12" height="12" rx="2"/><path d="M9 9h6v6H9zM9 2v4m6-4v4M9 18v4m6-4v4M2 9h4M2 15h4M18 9h4M18 15h4"/></symbol>
-<symbol id="ic-focus" viewBox="0 0 24 24"><path d="M12 3 4 7v5c0 5 3.4 8.7 8 10 4.6-1.3 8-5 8-10V7z"/><rect x="9" y="9" width="6" height="6" rx="1"/><path d="M12 1v3M6.5 4.2l1.6 2.3M17.5 4.2l-1.6 2.3M2 10h3M19 10h3"/></symbol>
-<symbol id="ic-award" viewBox="0 0 24 24"><circle cx="12" cy="8" r="5"/><path d="m8 12-2 9 6-3 6 3-2-9"/></symbol>
-<symbol id="ic-work" viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="14" rx="2"/><path d="M8 7V4h8v3M3 13h18"/></symbol>
-<symbol id="ic-mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 7 9-7"/></symbol>
-<symbol id="ic-music" viewBox="0 0 24 24"><path d="M9 19V5l12-3v14"/><ellipse cx="6" cy="19" rx="3" ry="2"/><ellipse cx="18" cy="16" rx="3" ry="2"/></symbol>
-<symbol id="ic-volume" viewBox="0 0 24 24"><path d="M4 9h5l5-5v16l-5-5H4zM17 9c2 2 2 4 0 6M20 6c4 4 4 8 0 12"/></symbol>
-<symbol id="ic-link" viewBox="0 0 24 24"><path d="M12 5h7v7m0-7L9 15M18 14v5H5V6h5"/></symbol>
-<symbol id="ic-code" viewBox="0 0 24 24"><path d="m8 5-6 7 6 7m8-14 6 7-6 7m-3-17-2 20"/></symbol>
-<symbol id="ic-phone" viewBox="0 0 24 24"><path d="M6 2h5l1 5-3 2c2 3 4 5 7 6l2-3 4 1v5c0 4-6 4-12-2S2 4 6 2z"/></symbol>
-<symbol id="ic-pin" viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 1 1 16 0z"/><circle cx="12" cy="10" r="3"/></symbol>
-<symbol id="ic-file" viewBox="0 0 24 24"><path d="M5 2h9l5 5v15H5zM14 2v6h5M8 13h8m-8 4h8"/></symbol>
-<symbol id="ic-github" viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.65 7.65 0 0 1 2-.27c.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></symbol>
-</defs></svg>
-<a class="skip" href="#home">Skip to main content</a>
-<aside class="sidebar" aria-label="Floating section navigation">
- <a class="brand" href="#home"><span class="brand-logo">MA.</span><span class="brand-copy"><strong>MARK ALLEN SARMIENTO</strong><small>ENGINEERING PORTFOLIO</small></span></a>
- <nav class="side-nav" aria-label="Portfolio sections">
-  <a class="active" href="#home"><span class="nav-icon"><svg class="icon"><use href="#ic-home"/></svg></span><span class="nav-label">Home</span></a>
-  <a href="#about"><span class="nav-icon"><svg class="icon"><use href="#ic-user"/></svg></span><span class="nav-label">About</span></a>
-  <a href="#projects"><span class="nav-icon"><svg class="icon"><use href="#ic-grid"/></svg></span><span class="nav-label">Projects</span></a>
-  <a href="#education"><span class="nav-icon"><svg class="icon"><use href="#ic-school"/></svg></span><span class="nav-label">Education</span></a>
-  <a href="#skills"><span class="nav-icon"><svg class="icon"><use href="#ic-cpu"/></svg></span><span class="nav-label">Skills</span></a>
-  <a href="#recognition"><span class="nav-icon"><svg class="icon"><use href="#ic-award"/></svg></span><span class="nav-label">Awards</span></a>
-  <a href="#experience"><span class="nav-icon"><svg class="icon"><use href="#ic-work"/></svg></span><span class="nav-label">Experience</span></a>
-  <a href="#contact"><span class="nav-icon"><svg class="icon"><use href="#ic-mail"/></svg></span><span class="nav-label">Contact</span></a>
- </nav>
- <div class="sidebar-foot"><div class="socials"><a class="social-button" href="https://github.com/urmarkiee" target="_blank" rel="noopener noreferrer" aria-label="Open GitHub profile"><svg class="icon fill"><use href="#ic-github"/></svg></a><a class="social-button" href="mailto:sarmientomark936@gmail.com" aria-label="Email Mark"><svg class="icon"><use href="#ic-mail"/></svg></a></div><p>Computer Engineering · Portfolio</p></div>
-</aside>
-<main class="main">
-  <header class="masthead"><span>MA / COMPUTER ENGINEERING</span><div class="live-status"><span class="status-dot"></span> Open to opportunities</div></header>
-  <section class="hero" id="home" aria-labelledby="hero-title">
-   <div class="circuit" aria-hidden="true"></div><div class="circuit right" aria-hidden="true"></div>
-   <div class="photo-shell"><div class="photo-ring"><img src="profile.jpg" alt="Professional portrait of Mark Allen Sarmiento" width="500" height="500"/></div></div>
-   <div class="eyebrow">Hello, I'm</div>
-   <h1 id="hero-title">Mark Allen <span>Sarmiento</span></h1>
-   <p class="role">Computer Engineering Student</p>
-   <p class="intro">I design, build, and troubleshoot across hardware and software—from microcontrollers and electronics to interfaces and web applications.</p>
-   <div class="hero-actions">
-    <a class="btn primary" href="#projects"><svg class="icon"><use href="#ic-grid"/></svg> Explore Projects</a>
-    <a class="btn" href="https://github.com/urmarkiee" target="_blank" rel="noopener noreferrer"><svg class="icon fill"><use href="#ic-github"/></svg> GitHub</a>
-    <a class="btn" href="assets/mark-allen-resume.png" target="_blank" rel="noopener"><svg class="icon"><use href="#ic-file"/></svg> View Résumé</a>
-   </div>
-   <div class="ambience">
-    <div class="widget"><h3>Choose Ambiance</h3><div class="theme-controls" role="group" aria-label="Choose color theme">
-      <button class="theme-btn" type="button" data-theme="light" aria-pressed="false"><span class="theme-dot light"></span>Light</button>
-      <button class="theme-btn" type="button" data-theme="dark" aria-pressed="true"><span class="theme-dot dark"></span>Dark</button>
-      <button class="theme-btn" type="button" data-theme="slate" aria-pressed="false"><span class="theme-dot slate"></span>Slate</button>
-    </div></div>
-    <div class="widget"><div class="music-top"><div class="music-name">Relaxing Music<small>Soft instrumental · Loop</small></div><button type="button" class="music-btn" id="musicToggle" aria-label="Play background music" aria-pressed="false">▶</button></div><label class="volume"><svg class="icon"><use href="#ic-volume"/></svg><input id="volume" type="range" min="0" max="1" value="0.25" step="0.05" aria-label="Music volume"/></label><audio id="music" src="assets/calm-instrumental.mp3" preload="none" loop></audio></div>
-   </div>
-  </section>
-  <section class="panel skills-showcase skills-mid" id="toolkit"><div class="section-kicker">01 / Capabilities</div><div class="section-head"><div><h2 class="panel-title"><span class="heading-icon"><svg class="icon"><use href="#ic-cpu"/></svg></span> Tools &amp; Technologies</h2><p class="showcase-subtitle">A quick look at my development tools, platforms, and technologies.</p></div><div class="slider-actions"><span class="skills-position" id="skillsCount" aria-live="polite">01 / 14</span><button class="slider-arrow arrow-large" id="skillsPrev" aria-label="Scroll skills left">←</button><button class="slider-arrow arrow-large" id="skillsNext" aria-label="Scroll skills right">→</button></div></div>
-    <div class="skill-scroll" id="skillsSlider" tabindex="0" role="region" aria-label="Swipeable tools and technologies">
-     <div class="skill-group"><div class="skill-badge brand-logo"><img src="assets/tool-logos/cplusplus.svg" alt="" loading="lazy" decoding="async"></div><p class="skill-name">C / C++</p><div class="skill-meta">Core Language</div></div>
-     <div class="skill-group"><div class="skill-badge brand-logo"><img src="assets/tool-logos/python.svg" alt="" loading="lazy" decoding="async"></div><p class="skill-name">Python</p><div class="skill-meta">Scripting</div></div>
-     <div class="skill-group"><div class="skill-badge brand-logo"><img src="assets/tool-logos/java.svg" alt="" loading="lazy" decoding="async"></div><p class="skill-name">Java</p><div class="skill-meta">OOP</div></div>
-     <div class="skill-group"><div class="skill-badge brand-logo"><img src="assets/tool-logos/javascript.svg" alt="" loading="lazy" decoding="async"></div><p class="skill-name">JavaScript</p><div class="skill-meta">Frontend</div></div>
-     <div class="skill-group"><div class="skill-badge brand-logo"><img src="assets/tool-logos/html5.svg" alt="" loading="lazy" decoding="async"></div><p class="skill-name">HTML</p><div class="skill-meta">HTML</div></div>
-     <div class="skill-group"><div class="skill-badge brand-logo"><img src="assets/tool-logos/css3.svg" alt="" loading="lazy" decoding="async"></div><p class="skill-name">CSS</p><div class="skill-meta">CSS</div></div>
-     <div class="skill-group"><div class="skill-badge brand-logo"><img src="assets/tool-logos/php.svg" alt="" loading="lazy" decoding="async"></div><p class="skill-name">PHP</p><div class="skill-meta">Backend</div></div>
-     <div class="skill-group"><div class="skill-badge brand-logo"><img src="assets/tool-logos/kotlin.svg" alt="" loading="lazy" decoding="async"></div><p class="skill-name">Kotlin</p><div class="skill-meta">Android</div></div>
-     <div class="skill-group"><div class="skill-badge brand-logo"><img src="assets/tool-logos/android-studio.svg" alt="" loading="lazy" decoding="async"></div><p class="skill-name">Android Studio</p><div class="skill-meta">Studio</div></div>
-     <div class="skill-group"><div class="skill-badge brand-logo"><img src="assets/tool-logos/react.svg" alt="" loading="lazy" decoding="async"></div><p class="skill-name">React</p><div class="skill-meta">UI Library</div></div>
-     <div class="skill-group"><div class="skill-badge brand-logo"><img src="assets/tool-logos/arduino.svg" alt="" loading="lazy" decoding="async"></div><p class="skill-name">Arduino</p><div class="skill-meta">Prototyping</div></div>
-     <div class="skill-group"><div class="skill-badge brand-logo"><img src="assets/tool-logos/github.svg" alt="" loading="lazy" decoding="async"></div><p class="skill-name">GitHub</p><div class="skill-meta">GitHub</div></div>
-     <div class="skill-group"><div class="skill-badge brand-logo"><img src="assets/tool-logos/mysql.svg" alt="" loading="lazy" decoding="async"></div><p class="skill-name">MySQL</p><div class="skill-meta">MySQL</div></div>
-     <div class="skill-group"><div class="skill-badge brand-logo"><img src="assets/tool-logos/supabase.svg" alt="" loading="lazy" decoding="async"></div><p class="skill-name">Supabase</p><div class="skill-meta">Supabase</div></div>
-    </div><div class="skill-footer"><p class="skill-tip">Swipe or use the arrows to move through the full skill set.</p><div class="skill-progress" aria-hidden="true"><span id="skillsProgressFill"></span></div></div>
-   </section>
-  <div class="dashboard">
-   <section class="panel span-8" id="about">
-    <div class="section-kicker">02 / Introduction</div><h2 class="panel-title"><span class="heading-icon"><svg class="icon"><use href="#ic-user"/></svg></span> About Me</h2>
-    <div class="about-layout"><div><p>I am a Bachelor of Science in Computer Engineering student at ICCT Colleges with practical experience in computer hardware troubleshooting, microcontroller projects, electronics, UI design, software development, and hardware–software integration. I also contribute to technical production and project coordination.</p></div>
-    <div><div class="info-row"><svg class="icon"><use href="#ic-school"/></svg> BS Computer Engineering · ICCT Colleges</div><div class="info-row"><svg class="icon"><use href="#ic-pin"/></svg> Taytay, Rizal, Philippines</div><div class="info-row"><svg class="icon"><use href="#ic-mail"/></svg> <a href="mailto:sarmientomark936@gmail.com">sarmientomark936@gmail.com</a></div><div class="info-row"><svg class="icon"><use href="#ic-phone"/></svg> <a href="tel:+639851289519">0985 128 9519</a></div></div></div>
-   </section>
-   <section class="panel span-4" aria-label="Portfolio focus areas"><div class="section-kicker">Focus / What I Do</div><h2 class="panel-title"><span class="heading-icon"><svg class="icon"><use href="#ic-focus"/></svg></span> Engineering Focus</h2><div class="quick-stats"><div class="stat"><strong>03</strong><span>Featured projects</span></div><div class="stat"><strong>HW</strong><span>Hardware design</span></div><div class="stat"><strong>SW</strong><span>Software development</span></div><div class="stat"><strong>IT</strong><span>Technical support</span></div></div></section>
-   <section class="panel span-12 showcase-panel" id="projects">
-    <div class="section-kicker">03 / Featured Work</div>
-    <div class="section-head showcase-head">
-      <div class="showcase-title"><h2 class="panel-title"><span class="heading-icon"><svg class="icon"><use href="#ic-grid"/></svg></span> Featured Projects</h2><p class="showcase-subtitle">Explore the things I've designed and built.</p></div>
-      <div class="carousel-tools"><span class="carousel-count" id="projectCount" aria-live="polite">01 <span>/ 03</span></span>
-        <button class="slider-arrow arrow-large" id="projectsPrev" type="button" aria-label="Previous project" title="Previous project">←</button>
-        <button class="slider-arrow arrow-large" id="projectsNext" type="button" aria-label="Next project" title="Next project">→</button>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <div class="ambient-grid" aria-hidden="true"></div>
+  <div class="glow glow-a" aria-hidden="true"></div>
+  <div class="glow glow-b" aria-hidden="true"></div>
+  <div id="home" class="home-anchor" aria-hidden="true"></div>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="wordmark" href="#home" aria-label="Mark Allen Sarmiento — home"><span class="mark">MA<span class="mark-point">/</span></span><span class="wordmark-text">markallen<span class="dim">://desk</span><small>COMPUTER ENGINEERING</small></span></a>
+      <nav class="desktop-nav" aria-label="Main navigation">
+        <a href="#home" class="current" aria-current="location">Home</a>
+        <a href="#about">About</a>
+        <a href="#pipeline">Process</a>
+        <a href="#projects">Projects</a>
+        <a href="#toolkit">Skills</a>
+        <a href="#github">GitHub</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <div class="header-actions">
+        <button class="icon-button ambience-toggle" id="ambienceToggle" aria-haspopup="true" aria-expanded="false" aria-controls="ambiencePanel" title="Ambiance and music settings">
+          <svg class="ico"><use href="#i-sliders"/></svg><span>Ambiance</span>
+        </button>
+        <button class="icon-button mobile-menu-button" id="mobileMenuToggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu"><svg class="ico"><use href="#i-menu"/></svg></button>
       </div>
     </div>
-    <div class="project-carousel-shell"><div class="project-grid" id="projectsSlider" tabindex="0" role="region" aria-roledescription="carousel" aria-label="Featured projects, swipe left or right">
-     <article class="project"><a href="assets/obstacle-robot.jpg" class="project-image gallery-trigger" data-index="0" aria-label="Enlarge Smart Obstacle-Avoiding Robot photograph"><img src="assets/obstacle-robot.jpg" loading="lazy" alt="Smart obstacle-avoiding robot prototype with yellow wheels"/><span class="open-photo">View Photo ↗</span></a><div class="project-content"><h3>Smart Obstacle-Avoiding Robot</h3><p>An Arduino-based robotics prototype using an ultrasonic sensor, motor control, and a servo mechanism to detect and avoid obstacles.</p><div class="tags"><span class="tag">Arduino Uno</span><span class="tag">Ultrasonic Sensor</span><span class="tag">Robotics</span></div><div class="project-actions"><a class="gallery-trigger" href="assets/obstacle-robot.jpg" data-index="0">Enlarge Photo ↗</a></div></div></article>
-     <article class="project"><a href="assets/medicare-front.jpg" class="project-image gallery-trigger" data-index="1" aria-label="Enlarge MEDICARE prototype photograph"><img src="assets/medicare-front.jpg" loading="lazy" alt="MEDICARE automatic medicine reminder prototype with LCD and control buttons"/><span class="open-photo">View Photo ↗</span></a><div class="project-content"><h3>MEDICARE — Medicine Reminder</h3><p>A prototype medicine reminder with an RTC clock, LCD, servo, IR sensor, audio feedback, and wireless wearable alerts.</p><div class="tags"><span class="tag">Arduino</span><span class="tag">DS3231</span><span class="tag">RF Module</span></div><div class="project-actions"><a class="gallery-trigger" href="assets/medicare-inside.jpg" data-index="2">Inside View ↗</a><a href="assets/medicare-schematic.pdf" target="_blank" rel="noopener">Schematic ↗</a><a href="assets/medicare-code.pdf" target="_blank" rel="noopener">Source Code ↗</a></div></div></article>
-     <article class="project"><a href="assets/logitrack-screenshot.png" class="project-image gallery-trigger" data-index="3" aria-label="Enlarge LogiTrack website screenshot"><img src="assets/logitrack-screenshot.png" loading="lazy" alt="LogiTrack logistics tracking website screenshot"/><span class="open-photo">View Preview ↗</span></a><div class="project-content"><h3>LogiTrack 1.0</h3><p>A responsive logistics tracking website featuring a package lookup interface and delivery journey information.</p><div class="tags"><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span><span class="tag">Web Design</span></div><div class="project-actions"><a href="https://urmarkiee.github.io/LogiTrack1.0/" target="_blank" rel="noopener noreferrer">Visit Live Website ↗</a><a class="gallery-trigger" href="assets/logitrack-screenshot.png" data-index="3">Preview ↗</a></div></div></article>
-    </div></div>
-    <div class="carousel-footer"><div class="carousel-progress" role="progressbar" aria-label="Project carousel progress" aria-valuemin="1" aria-valuemax="3" aria-valuenow="1" id="projectProgress"><span id="projectProgressFill"></span></div><div class="carousel-dots" id="projectDots" role="group" aria-label="Choose a featured project"></div><p class="carousel-hint">↔ Swipe to explore projects</p></div>
-   </section>
+    <div class="mobile-menu" id="mobileMenu" hidden>
+      <nav aria-label="Mobile navigation"><a href="#home">Home</a><a href="#about">About</a><a href="#pipeline">Process</a><a href="#projects">Projects</a><a href="#toolkit">Skills</a><a href="#github">GitHub</a><a href="#contact">Contact</a></nav>
+    </div>
+    <div class="ambience-panel" id="ambiencePanel" hidden>
+      <div class="control-head"><span class="tiny mono">DESK.PREFERENCES</span><button class="text-close" id="ambienceClose" aria-label="Close ambiance settings">✕</button></div>
+      <div class="control-label">Display mode</div>
+      <div class="theme-list" role="group" aria-label="Choose color theme">
+        <button class="theme-option" data-theme="dark" aria-pressed="true"><span class="theme-swatch swatch-dark"></span> Midnight</button>
+        <button class="theme-option" data-theme="light" aria-pressed="false"><span class="theme-swatch swatch-light"></span> Light</button>
+        <button class="theme-option" data-theme="slate" aria-pressed="false"><span class="theme-swatch swatch-slate"></span> Slate</button>
+      </div>
+      <div class="control-label with-space">Background audio</div>
+      <div class="audio-controls"><button type="button" id="musicToggle" class="music-toggle"><svg class="ico"><use href="#i-play"/></svg><span id="musicLabel">Play relaxing music</span></button><label class="volume-label" for="volume">Volume</label><input id="volume" type="range" min="0" max="100" value="24" aria-label="Music volume"></div>
+      <audio id="backgroundMusic" loop preload="none" src="assets/audio/calm-instrumental.mp3"></audio>
+    </div>
+  </header>
+  <main id="main" class="page-container">
+    <!-- HERO : terminal and profile-scan inspired by a developer workbench -->
+    <section class="hero section-gap" aria-label="Introduction">
+      <div class="hero-copy fade-in">
+        <p class="eyebrow mono"><span class="status-pulse"></span> identity.session <span class="right-dim">/ portfolio active</span></p>
+        <div class="terminal-head mono"><span class="terminal-symbol">$</span><span>mark@engineering:~</span><span class="terminal-command">whoami</span><span class="cursor" aria-hidden="true">_</span></div>
+        <h1><span class="hash-mark">#</span> Mark Allen Sarmiento <span class="heading-accent">builds practical engineering solutions.</span></h1>
+        <p class="hero-description">I turn hardware and software ideas into functional prototypes and web applications, combining microcontrollers, electronics, interface design, and problem-solving.</p>
+        <div class="hero-chips"><span><svg class="ico"><use href="#i-cpu"/></svg> Hardware &amp; Electronics</span><span><svg class="ico"><use href="#i-code"/></svg> Software Development</span><span><svg class="ico"><use href="#i-map"/></svg> Philippines</span></div>
+        <div class="hero-buttons"><a class="btn btn-main" href="#projects">Explore project cases <svg class="ico"><use href="#i-arrow"/></svg></a><a class="btn btn-outline" href="mailto:sarmientomark936@gmail.com?subject=Portfolio%20Inquiry">Get in touch <svg class="ico"><use href="#i-mail"/></svg></a></div>
+        <div class="hero-metadata mono"><span><i class="led"></i> STATUS: OPEN TO COLLABORATION</span><span>DEVICE: COMPUTER ENGINEERING</span></div>
+      </div>
+      <aside class="scan-card fade-in" aria-label="Professional profile">
+        <div class="scan-head mono"><span>PROFILE.SCAN</span><span class="online"><i class="led"></i> online</span></div>
+        <button class="scan-photo profile-toggle" id="profileToggle" type="button" aria-label="Switch profile photo" aria-pressed="false" data-mode="formal">
+          <img id="profileImage" src="assets/profile-formal.png" alt="Formal portrait of Mark Allen Sarmiento" width="1254" height="1254" data-formal="assets/profile-formal.png" data-casual="assets/profile-casual-new.png">
+          <div class="photo-scanline" aria-hidden="true"></div>
+          <div class="scan-photo-caption mono"><span id="profileCaptionLeft">IDENTITY VERIFIED</span> <span id="profileCaptionRight">MA.001</span></div>
+        </button>
+        <div class="profile-name"><strong>Mark Allen Sarmiento</strong><span id="profileRoleLine">Computer Engineering Student</span></div>
+        <div class="scan-stats"><div><span class="stat-label mono">FOCUS</span><strong>Hardware + Software</strong></div><div><span class="stat-label mono">STACK</span><strong>Arduino · Web · IT</strong></div><div><span class="stat-label mono">PROJECTS</span><strong>4 featured works</strong></div><div><span class="stat-label mono">SIGNAL</span><strong>Learning &amp; Building</strong></div></div>
+      </aside>
+    </section>
 
-   <section class="panel span-12 competency-section" id="skills" aria-label="Detailed Technical Skills">
-     <div class="section-kicker">04 / Practical Expertise</div>
-     <div class="section-head competency-heading">
-       <div>
-         <h2 class="panel-title"><span class="heading-icon"><svg class="icon"><use href="#ic-cpu"/></svg></span> Technical Skills</h2>
-         <p class="showcase-subtitle">My practical abilities across hardware, software, and networking.</p>
-       </div>
-       <div class="slider-actions"><span class="skills-position" id="competencyCount" aria-live="polite">01 / 03</span>
-         <button class="slider-arrow arrow-large" type="button" id="competencyPrev" aria-label="Previous technical skill category">←</button>
-         <button class="slider-arrow arrow-large" type="button" id="competencyNext" aria-label="Next technical skill category">→</button>
-       </div>
-     </div>
-     <div class="competency-rail" id="competencyRail" role="region" tabindex="0" aria-label="Technical skill categories, swipe sideways">
-       <article class="competency-card">
-         <div class="competency-header"><span class="competency-symbol"><svg class="icon"><use href="#ic-cpu"/></svg></span><span class="competency-id">01 / Hardware</span></div>
-         <h3>Hardware &amp; Electronics</h3>
-         <div class="tags">
-           <span class="tag">Computer Hardware Troubleshooting</span><span class="tag">PC Assembly &amp; Maintenance</span><span class="tag">Arduino &amp; ESP32</span><span class="tag">Raspberry Pi</span><span class="tag">Circuit Design &amp; Testing</span><span class="tag">Microcontroller Programming</span><span class="tag">Hardware–Software Integration</span><span class="tag">Embedded Systems</span><span class="tag">Sensors &amp; Actuators</span>
-         </div>
-       </article>
-       <article class="competency-card">
-         <div class="competency-header"><span class="competency-symbol"><svg class="icon"><use href="#ic-code"/></svg></span><span class="competency-id">02 / Software</span></div>
-         <h3>Software &amp; Programming</h3>
-         <div class="tags">
-           <span class="tag">Software Development</span><span class="tag">C / C++ Programming</span><span class="tag">Object-Oriented Programming</span><span class="tag">Web Design</span><span class="tag">HTML / CSS / JavaScript</span><span class="tag">Android Studio</span><span class="tag">UI / UX Design</span><span class="tag">Arduino IDE</span><span class="tag">Software Troubleshooting</span><span class="tag">Project Management</span>
-         </div>
-       </article>
-       <article class="competency-card">
-         <div class="competency-header"><span class="competency-symbol"><svg class="icon"><use href="#ic-link"/></svg></span><span class="competency-id">03 / IT &amp; Networks</span></div>
-         <h3>Networking &amp; IT Support</h3>
-         <div class="tags">
-           <span class="tag">Computer Networking</span><span class="tag">LAN Configuration</span><span class="tag">Network Troubleshooting</span><span class="tag">Windows Installation &amp; Configuration</span><span class="tag">PC Technical Support</span>
-         </div>
-       </article>
-     </div>
-     <p class="competency-hint">Swipe left or right to explore each skill category.</p>
-   </section>
-   
-   <section class="panel span-5" id="education"><div class="section-kicker">05 / Academic Path</div><h2 class="panel-title"><span class="heading-icon"><svg class="icon"><use href="#ic-school"/></svg></span> Education</h2>
-    <div class="edu"><time>2023 – 2027 (expected)</time><strong>Bachelor of Science in Computer Engineering</strong><p>ICCT Colleges</p></div><div class="edu"><time>2022 – 2023</time><strong>Senior High School · ICT</strong><p>Taytay Senior High School</p></div><div class="edu"><time>Secondary Education</time><strong>Junior High School</strong><p>Taytay National High School</p></div>
-   </section>
-   <section class="panel span-7" id="experience"><div class="section-kicker">06 / Roles &amp; Experience</div><h2 class="panel-title"><span class="heading-icon"><svg class="icon"><use href="#ic-work"/></svg></span> Experience</h2><div class="experience-list">
-    <div class="exp"><time>2021 – Present</time><h3>Technical Director</h3><p>Media &amp; Communication · River of Life Methodist Church</p></div>
-    <div class="exp"><time>2024 – Present</time><h3>Freelance PC Assembly &amp; Maintenance</h3><p>Independent technical support · Taytay, Rizal</p></div>
-    <div class="exp"><time>2025</time><h3>Hardware–Software Integration Engineer</h3><p>Embedded Systems Project · ICCT Colleges</p></div>
-    <div class="exp"><time>2025</time><h3>Project Manager</h3><p>Object-Oriented Programming Project · ICCT Colleges</p></div>
-    <div class="exp"><time>2024</time><h3>Project Manager</h3><p>Science Investigatory Project · ICCT Colleges</p></div>
-    <div class="exp"><time>2023</time><h3>Visual Designer</h3><p>Senior High School Work Immersion · Taytay Senior High School</p></div>
-   </div></section>
-   <section class="panel span-5" id="recognition"><div class="section-kicker">07 / Recognition</div><h2 class="panel-title"><span class="heading-icon"><svg class="icon"><use href="#ic-award"/></svg></span> Achievements</h2><div class="award-row"><a class="gallery-trigger" data-index="4" href="assets/sip-certificate.jpg" aria-label="Enlarge SIP certificate"><img src="assets/sip-certificate.jpg" alt="SIP certificate presented to group ELNO" loading="lazy"/></a><div><div class="mini">March 2024 · Group ELNO</div><h3>Top 15 — Science Investigatory Project</h3><p>Team recognition in Bato-Balani Version 2.0 at ICCT Colleges. Certificate presented to ELNO.</p><a class="btn gallery-trigger" data-index="4" href="assets/sip-certificate.jpg">View Certificate ↗</a></div></div></section>
-   <section class="panel span-7" id="contact"><div class="section-kicker">08 / Get in Touch</div><h2 class="panel-title"><span class="heading-icon"><svg class="icon"><use href="#ic-mail"/></svg></span> Let's Connect</h2><p>Open to engineering collaboration, software projects, learning opportunities, and technical support work. Feel free to explore my work or send a message.</p><div class="contact-actions"><a class="btn primary" href="mailto:sarmientomark936@gmail.com?subject=Portfolio%20Inquiry"><svg class="icon"><use href="#ic-mail"/></svg> Email Me</a><a class="btn" href="https://github.com/urmarkiee" target="_blank" rel="noopener noreferrer"><svg class="icon fill"><use href="#ic-github"/></svg> GitHub</a><a class="btn" href="assets/mark-allen-resume.png" target="_blank" rel="noopener"><svg class="icon"><use href="#ic-file"/></svg> View Résumé</a><a class="btn" href="tel:+639851289519"><svg class="icon"><use href="#ic-phone"/></svg> Call</a></div></section>
-  </div>
-  <footer class="footer"><span>© <span id="copyrightYear">2026</span> Mark Allen Sarmiento</span><span>Computer Engineering Portfolio</span></footer>
-</main>
-<dialog class="viewer" id="imageViewer" aria-labelledby="viewerTitle"><div class="viewer-inner"><div class="viewer-head"><div><strong id="viewerTitle">Project image</strong><div class="muted" style="font-size:11px" id="viewerCount"></div></div><button type="button" class="viewer-close" id="viewerClose" aria-label="Close gallery">✕ Close</button></div><div class="viewer-row"><button type="button" class="viewer-arrow" id="viewerPrev" aria-label="Previous image">❮</button><img src="" id="viewerImage" alt=""/><button type="button" class="viewer-arrow" id="viewerNext" aria-label="Next image">❯</button></div><p id="viewerCaption"></p><a id="viewerOriginal" href="#" target="_blank" rel="noopener">Open Original ↗</a></div></dialog>
-<script>
-(() => {
-  'use strict';
-  const root=document.documentElement;
-  const themeButtons=[...document.querySelectorAll('button[data-theme]')];
-  function setTheme(theme){
-    if(!['light','dark','slate'].includes(theme))theme='dark';
-    root.dataset.theme=theme;
-    themeButtons.forEach(button=>button.setAttribute('aria-pressed',String(button.dataset.theme===theme)));
-    document.querySelector('meta[name="theme-color"]').content=theme==='dark'?'#08121f':theme==='slate'?'#e7eeee':'#f2f6fb';
-    try{localStorage.setItem('markPortfolioTheme',theme)}catch(_){}
-  }
-  themeButtons.forEach(button=>button.addEventListener('click',()=>setTheme(button.dataset.theme)));
-  try{setTheme(localStorage.getItem('markPortfolioTheme')||'dark')}catch(_){setTheme('dark')}
-  document.getElementById('copyrightYear').textContent=new Date().getFullYear();
+    <section class="section-block" id="about">
+      <div class="section-heading"><p class="section-index mono">01 / OPERATOR PROFILE</p><h2>Engineering with a <em>builder's mindset.</em></h2><p>A Computer Engineering student at ICCT Colleges, working where electronics, software, and useful human experiences come together.</p></div>
+      <div class="about-layout">
+        <div class="about-statement card"><div class="card-terminal mono">ABOUT.MD <span>● READ MODE</span></div><p>I am a Bachelor of Science in Computer Engineering student with practical project experience in microcontrollers, hardware troubleshooting, PC maintenance, software development, web design, networking, and technical production. I enjoy learning new technologies and integrating them into real-world prototypes.</p><div class="keyline mono"><span>DESIGN</span><b>/</b><span>BUILD</span><b>/</b><span>TEST</span><b>/</b><span>IMPROVE</span></div></div>
+        <div class="expertise-grid">
+          <article class="expertise-card card"><span class="feature-icon"><svg class="ico"><use href="#i-cpu"/></svg></span><h3>Hardware Integration</h3><p>Microcontrollers, sensors, circuitry, and embedded prototypes that connect physical systems with software.</p></article>
+          <article class="expertise-card card"><span class="feature-icon"><svg class="ico"><use href="#i-code"/></svg></span><h3>Software &amp; Web</h3><p>Interfaces and web applications developed with programming fundamentals, responsive design, and data workflows.</p></article>
+          <article class="expertise-card card"><span class="feature-icon"><svg class="ico"><use href="#i-settings"/></svg></span><h3>Technical Support</h3><p>PC assembly, troubleshooting, Windows configuration, networking, and hands-on problem solving.</p></article>
+        </div>
+      </div>
+    </section>
 
-  // Audio begins only after the visitor chooses to play; browser autoplay rules are respected.
-  const audio=document.getElementById('music');const musicToggle=document.getElementById('musicToggle');const volume=document.getElementById('volume');
-  audio.volume=+volume.value;volume.addEventListener('input',()=>{audio.volume=+volume.value});
-  function syncMusic(){const playing=!audio.paused;musicToggle.textContent=playing?'Ⅱ':'▶';musicToggle.setAttribute('aria-label',playing?'Pause background music':'Play background music');musicToggle.setAttribute('aria-pressed',String(playing))}
-  musicToggle.addEventListener('click',async()=>{if(!audio.paused){audio.pause()}else{try{await audio.play()}catch(err){musicToggle.title='Your browser could not play the track'}}syncMusic()});
-  audio.addEventListener('play',syncMusic);audio.addEventListener('pause',syncMusic);audio.addEventListener('error',()=>{musicToggle.title='Music file missing or not supported'});
+    <section class="section-block" id="pipeline">
+      <div class="section-heading"><p class="section-index mono">02 / ENGINEERING PIPELINE</p><h2>From concept to <em>working system.</em></h2><p>The way I approach engineering tasks, from defining a problem to improving a prototype.</p></div>
+      <div class="pipeline-grid">
+        <article class="pipeline-step card"><div class="pipeline-top"><svg class="ico"><use href="#i-search"/></svg><span class="mono">01</span></div><h3>Understand</h3><p>Identify needs, constraints, and the problem a solution must address.</p><div class="keyword-row"><span>Research</span><span>Requirements</span></div></article>
+        <article class="pipeline-step card"><div class="pipeline-top"><svg class="ico"><use href="#i-layers"/></svg><span class="mono">02</span></div><h3>Design</h3><p>Map out circuits, system components, interactions, and user flows.</p><div class="keyword-row"><span>Diagrams</span><span>UI / UX</span></div></article>
+        <article class="pipeline-step card"><div class="pipeline-top"><svg class="ico"><use href="#i-cpu"/></svg><span class="mono">03</span></div><h3>Prototype</h3><p>Assemble hardware or implement initial application features.</p><div class="keyword-row"><span>Arduino</span><span>Code</span></div></article>
+        <article class="pipeline-step card"><div class="pipeline-top"><svg class="ico"><use href="#i-link"/></svg><span class="mono">04</span></div><h3>Integrate</h3><p>Connect sensors, logic, data, and user interfaces into a single flow.</p><div class="keyword-row"><span>System Logic</span><span>Interfaces</span></div></article>
+        <article class="pipeline-step card"><div class="pipeline-top"><svg class="ico"><use href="#i-check"/></svg><span class="mono">05</span></div><h3>Test</h3><p>Check functionality, reproduce issues, and refine the experience.</p><div class="keyword-row"><span>Debugging</span><span>Quality</span></div></article>
+        <article class="pipeline-step card"><div class="pipeline-top"><svg class="ico"><use href="#i-rocket"/></svg><span class="mono">06</span></div><h3>Share</h3><p>Document the results, demonstrate the system, and plan improvements.</p><div class="keyword-row"><span>GitHub</span><span>Demo</span></div></article>
+      </div>
+      <div class="operating-range"><div><p class="mono small-label">CURRENT OPERATING RANGE</p><h3>Hardware awareness. Software thinking. Practical outcomes.</h3><p>My work spans circuit-based prototypes, standalone applications, and responsive websites—grounded in solving a clearly defined problem.</p></div><div class="range-indicator mono"><span>HARDWARE</span><span class="line"></span><span>SOFTWARE</span></div></div>
+    </section>
 
-  // Native horizontal swipe/trackpad support, plus accessible controls for both carousels.
-  const reduceMotion=window.matchMedia('(prefers-reduced-motion: reduce)');
-  const slideBehavior=()=>reduceMotion.matches?'instant':'smooth';
-  const projectRail=document.getElementById('projectsSlider');
-  const projectCards=[...projectRail.querySelectorAll('.project')];
-  const projectCount=document.getElementById('projectCount');
-  const projectDots=document.getElementById('projectDots');
-  const projectProgress=document.getElementById('projectProgress');
-  const projectProgressFill=document.getElementById('projectProgressFill');
-  const prevProject=document.getElementById('projectsPrev');
-  const nextProject=document.getElementById('projectsNext');
-  let currentProject=0;
-  projectCards.forEach((card,i)=>{
-    card.setAttribute('aria-label',`Project ${i+1} of ${projectCards.length}`);
-    const dot=document.createElement('button');
-    dot.type='button';dot.setAttribute('aria-label',`Show project ${i+1}: ${card.querySelector('h3')?.textContent||''}`);
-    dot.addEventListener('click',()=>goProject(i));
-    projectDots.appendChild(dot);
-  });
-  const dots=[...projectDots.children];
-  function carouselIndex(rail,cards){
-    const maxScroll=rail.scrollWidth-rail.clientWidth;
-    return maxScroll<=1?0:Math.min(cards.length-1,Math.max(0,Math.round(rail.scrollLeft/maxScroll*(cards.length-1))));
-  }
-  function slideTo(rail,index,total){
-    const target=Math.max(0,Math.min(index,total-1));
-    const maxScroll=Math.max(0,rail.scrollWidth-rail.clientWidth);
-    rail.scrollTo({left:total<=1?0:target/(total-1)*maxScroll,behavior:slideBehavior()});
-  }
-  function updateProjectUI(){
-    currentProject=carouselIndex(projectRail,projectCards);
-    const n=currentProject+1,total=projectCards.length;
-    projectCount.innerHTML=`${String(n).padStart(2,'0')} <span>/ ${String(total).padStart(2,'0')}</span>`;
-    projectProgressFill.style.width=`${n/total*100}%`;
-    projectProgress.setAttribute('aria-valuenow',String(n));
-    dots.forEach((dot,i)=>dot.setAttribute('aria-current',String(i===currentProject)));
-    projectCards.forEach((card,i)=>card.classList.toggle('is-current',i===currentProject));
-    prevProject.disabled=currentProject===0;
-    nextProject.disabled=currentProject===total-1;
-  }
-  function goProject(i){
-    const target=Math.max(0,Math.min(i,projectCards.length-1));
-    slideTo(projectRail,target,projectCards.length);
-    // Smooth scrolling can take a moment; controls update on the scroll event.
-    if(reduceMotion.matches) updateProjectUI();
-  }
-  prevProject.addEventListener('click',()=>goProject(Math.max(0,currentProject-1)));
-  nextProject.addEventListener('click',()=>goProject(Math.min(projectCards.length-1,currentProject+1)));
-  projectRail.addEventListener('scroll',()=>requestAnimationFrame(updateProjectUI),{passive:true});
-  projectRail.addEventListener('keydown',e=>{
-    if(e.key==='ArrowRight'){e.preventDefault();goProject(currentProject+1)}
-    if(e.key==='ArrowLeft'){e.preventDefault();goProject(currentProject-1)}
-  });
-  // Allow mouse click-and-drag on blank card/rail areas; links and buttons remain clickable.
-  function addMouseDrag(rail){
-    let startX=0,startLeft=0,dragging=false,moved=false;
-    rail.addEventListener('pointerdown',e=>{
-      if(e.pointerType!=='mouse'||e.button!==0||e.target.closest('a,button,input'))return;
-      startX=e.clientX;startLeft=rail.scrollLeft;moved=false;dragging=true;
-    });
-    rail.addEventListener('pointermove',e=>{
-      if(!dragging)return;
-      const delta=e.clientX-startX;
-      if(Math.abs(delta)>5){moved=true;rail.scrollLeft=startLeft-delta}
-    });
-    window.addEventListener('pointerup',()=>dragging=false);
-    rail.addEventListener('dragstart',e=>e.preventDefault());
-  }
-  addMouseDrag(projectRail);
-  // A separate, compact icon rail for Tools & Technologies.
-  const slider=document.getElementById('skillsSlider');
-  const skillCards=[...slider.querySelectorAll('.skill-group')];
-  const skillCount=document.getElementById('skillsCount');
-  const skillProgressFill=document.getElementById('skillsProgressFill');
-  const skillsPrev=document.getElementById('skillsPrev');
-  const skillsNext=document.getElementById('skillsNext');
-  function iconStep(){return skillCards.length>1?skillCards[1].offsetLeft-skillCards[0].offsetLeft:100}
-  function updateSkillsUI(){
-    const max=Math.max(0,slider.scrollWidth-slider.clientWidth);
-    const current=Math.min(skillCards.length-1,Math.max(0,Math.round(slider.scrollLeft/Math.max(1,iconStep()))));
-    skillCount.textContent=`${String(current+1).padStart(2,'0')} / ${String(skillCards.length).padStart(2,'0')}`;
-    skillProgressFill.style.width=`${max>0?((slider.scrollLeft/max)*100):100}%`;
-    skillCards.forEach((card,i)=>card.classList.toggle('is-current',i===current));
-    skillsPrev.disabled=slider.scrollLeft<=2;
-    skillsNext.disabled=slider.scrollLeft>=max-2;
-  }
-  function goSkill(direction){
-    slider.scrollBy({left:direction*iconStep(),behavior:slideBehavior()});
-    if(reduceMotion.matches)requestAnimationFrame(updateSkillsUI);
-  }
-  skillsPrev.addEventListener('click',()=>goSkill(-1));
-  skillsNext.addEventListener('click',()=>goSkill(1));
-  slider.addEventListener('scroll',()=>requestAnimationFrame(updateSkillsUI),{passive:true});
-  slider.addEventListener('keydown',e=>{
-    if(e.key==='ArrowRight'){e.preventDefault();goSkill(1)}
-    if(e.key==='ArrowLeft'){e.preventDefault();goSkill(-1)}
-  });
-  addMouseDrag(slider);
+    <section class="section-block" id="projects">
+      <div class="section-heading project-heading"><div><p class="section-index mono">03 / PROJECT CASE FILES</p><h2>Selected work, <em>explained.</em></h2><p>Not just screenshots—each case explains the need, the build, and what the project demonstrates.</p></div><div class="filter-row" role="group" aria-label="Filter projects"><button data-filter="all" class="filter-button is-active" aria-pressed="true">All projects</button><button data-filter="hardware" class="filter-button" aria-pressed="false">Hardware</button><button data-filter="web" class="filter-button" aria-pressed="false">Web</button><button data-filter="app" class="filter-button" aria-pressed="false">App UI</button></div></div>
+      <div class="case-grid" id="caseGrid">
+        <article class="case-card card" data-category="hardware">
+          <a href="assets/projects/obstacle-robot.jpg" class="case-image gallery-open" data-gallery="0" aria-label="View a larger photo of the obstacle-avoiding robot"><img src="assets/projects/obstacle-robot.jpg" alt="Smart Obstacle-Avoiding Robot, Arduino-based prototype with yellow wheels" loading="lazy"><span class="image-open"><svg class="ico"><use href="#i-expand"/></svg> Enlarge</span></a>
+          <div class="case-content"><div class="case-id mono"><span>CASE 01</span><span class="category-chip">ROBOTICS</span></div><h3>Smart Obstacle-Avoiding Robot</h3><p class="case-summary">An Arduino-powered prototype that detects obstacles and steers using an ultrasonic sensor and motor controls.</p><div class="case-flow"><div><small class="mono">PROBLEM</small><p>A mobile robot needs to recognize nearby obstacles and respond to them.</p></div><div><small class="mono">BUILT</small><p>Ultrasonic sensing, Arduino Uno control, motor driver, and servo steering logic.</p></div><div><small class="mono">DEMONSTRATES</small><p>Hands-on integration of sensing, electronics, and movement control.</p></div></div><div class="technology-tags"><span>Arduino Uno</span><span>Ultrasonic</span><span>Motor Driver</span><span>Robotics</span></div><div class="case-actions"><a href="assets/projects/obstacle-robot.jpg" class="case-link gallery-open" data-gallery="0">Open project photo <svg class="ico"><use href="#i-arrow"/></svg></a></div></div>
+        </article>
+        <article class="case-card card" data-category="hardware">
+          <a href="assets/projects/medicare-front.jpg" class="case-image gallery-open" data-gallery="1" aria-label="View a larger photo of the MEDICARE prototype"><img src="assets/projects/medicare-front.jpg" alt="MEDICARE medication reminder prototype with circular housing, display, and buttons" loading="lazy"><span class="image-open"><svg class="ico"><use href="#i-expand"/></svg> Enlarge</span></a>
+          <div class="case-content"><div class="case-id mono"><span>CASE 02</span><span class="category-chip">EMBEDDED</span></div><h3>MEDICARE — Medicine Reminder</h3><p class="case-summary">A prototype combining scheduled reminders, a motorized tray, display controls, sensing, and wireless alert components.</p><div class="case-flow"><div><small class="mono">PROBLEM</small><p>Medication schedules are easy to miss without a timely reminder.</p></div><div><small class="mono">BUILT</small><p>Microcontroller control, DS3231 RTC, LCD, servo, IR sensor, and RF-linked alerts.</p></div><div><small class="mono">DEMONSTRATES</small><p>Coordinating timed logic with physical components and user feedback.</p></div></div><div class="technology-tags"><span>Arduino</span><span>DS3231</span><span>LCD</span><span>Servo</span><span>RF Module</span></div><div class="case-actions"><a href="assets/projects/medicare-inside.jpg" class="case-link gallery-open" data-gallery="2">Inside view <svg class="ico"><use href="#i-expand"/></svg></a><a href="assets/documents/medicare-schematic.pdf" class="case-link" target="_blank" rel="noopener">Schematic <svg class="ico"><use href="#i-arrow"/></svg></a><a href="assets/documents/medicare-code.pdf" class="case-link" target="_blank" rel="noopener">Code <svg class="ico"><use href="#i-arrow"/></svg></a></div></div>
+        </article>
+        <article class="case-card card" data-category="web">
+          <a href="assets/projects/logitrack.png" class="case-image gallery-open" data-gallery="3" aria-label="View a larger screenshot of the LogiTrack website"><img src="assets/projects/logitrack.png" alt="LogiTrack 1.0 website with teal package tracking hero" loading="lazy"><span class="image-open"><svg class="ico"><use href="#i-expand"/></svg> Enlarge</span></a>
+          <div class="case-content"><div class="case-id mono"><span>CASE 03</span><span class="category-chip">WEB</span></div><h3>LogiTrack 1.0</h3><p class="case-summary">A responsive logistics tracking interface for looking up packages and presenting recorded delivery progress.</p><div class="case-flow"><div><small class="mono">PROBLEM</small><p>Customers need a clearer way to check a shipment's reported progress.</p></div><div><small class="mono">BUILT</small><p>A tracking interface, status presentation, and shipment information workflow.</p></div><div><small class="mono">DEMONSTRATES</small><p>Responsive web UI, JavaScript interactions, and data-oriented page design.</p></div></div><div class="technology-tags"><span>HTML</span><span>CSS</span><span>JavaScript</span><span>Web UI</span></div><div class="case-actions"><a href="https://urmarkiee.github.io/LogiTrack1.0/" class="case-link" target="_blank" rel="noopener noreferrer">Visit live website <svg class="ico"><use href="#i-arrow"/></svg></a><a href="assets/projects/logitrack.png" class="case-link gallery-open" data-gallery="3">Screenshot <svg class="ico"><use href="#i-expand"/></svg></a></div></div>
+        </article>
+        <article class="case-card card" data-category="app">
+          <div class="case-image synced-preview" aria-label="Synced N application screen previews">
+            <a class="synced-screen gallery-open" href="assets/projects/synced-n-welcome.jpg" data-gallery="5" aria-label="Enlarge Synced N Get Started screen">
+              <img src="assets/projects/synced-n-welcome.jpg" alt="Synced N opening screen with Get Started button and church ministry branding" loading="lazy">
+              <span class="screen-label mono">GET STARTED</span>
+            </a>
+            <a class="synced-screen gallery-open" href="assets/projects/synced-n-login.jpg" data-gallery="6" aria-label="Enlarge Synced N login screen">
+              <img src="assets/projects/synced-n-login.jpg" alt="Synced N sign-in screen showing email or mobile number, password, and sign-in options" loading="lazy">
+              <span class="screen-label mono">SIGN IN</span>
+            </a>
+          </div>
+          <div class="case-content">
+            <div class="case-id mono"><span>CASE 04</span><span class="category-chip">MOBILE APPLICATION</span></div>
+            <h3>Synced N — Church Ministry Management</h3>
+            <p class="case-summary">Synced N is a mobile application project intended to help church ministry teams access ministry announcements, schedules, and team-related updates through a centralized platform. My contributions focus on frontend development and analyzing the user journeys and requirements behind the system.</p>
+            <div class="synced-role" aria-label="My responsibilities on Synced N"><span class="mono">MY ROLES</span><strong>Frontend Developer</strong><strong>System Analyst</strong></div>
+            <div class="case-flow synced-details">
+              <div><small class="mono">PROJECT GOAL</small><p>Provide members and ministry leaders with a clear, accessible entry point for church-related information and coordination.</p></div>
+              <div><small class="mono">FRONTEND</small><p>Worked on the application’s opening and sign-in screens, translating page requirements into mobile interface components, navigation elements, and account-entry fields.</p></div>
+              <div><small class="mono">SYSTEM ANALYSIS</small><p>Analyzed registration and sign-in flows, the distinction between member and administrator access, and how dashboards and announcements fit into the intended user experience.</p></div>
+              <div><small class="mono">SCREEN FLOW</small><p>The shared screenshots show the Get Started page and the login screen with email/mobile number and password inputs, password recovery, and a Google sign-in option.</p></div>
+              <div><small class="mono">CONTRIBUTION</small><p>Combined frontend implementation work with requirements analysis, helping align the screens and navigation structure with the intended ministry workflows.</p></div>
+            </div>
+            <div class="technology-tags"><span>Frontend Development</span><span>System Analysis</span><span>User Flows</span><span>Mobile Application</span></div>
+            <div class="case-actions">
+              <a class="case-link gallery-open" href="assets/projects/synced-n-welcome.jpg" data-gallery="5">View Get Started screen <svg class="ico"><use href="#i-expand"/></svg></a>
+              <a class="case-link gallery-open" href="assets/projects/synced-n-login.jpg" data-gallery="6">View Sign-in screen <svg class="ico"><use href="#i-expand"/></svg></a>
+            </div>
+          </div>
+        </article>
+      </div>
+      <p class="filter-empty" id="filterEmpty" hidden>No projects match this filter.</p>
+    </section>
 
-  // Preserve full categories from the earlier Technical Skills panel.
-  const competencyRail=document.getElementById('competencyRail');
-  const competencyCards=[...competencyRail.querySelectorAll('.competency-card')];
-  const competencyPrev=document.getElementById('competencyPrev');
-  const competencyNext=document.getElementById('competencyNext');
-  const competencyCount=document.getElementById('competencyCount');
-  function categoryStep(){return competencyCards.length>1?competencyCards[1].offsetLeft-competencyCards[0].offsetLeft:competencyRail.clientWidth}
-  function updateCompetencies(){
-    const max=Math.max(0,competencyRail.scrollWidth-competencyRail.clientWidth);
-    const current=Math.min(competencyCards.length-1,Math.max(0,Math.round(competencyRail.scrollLeft/Math.max(1,categoryStep()))));
-    competencyCount.textContent=`${String(current+1).padStart(2,'0')} / ${String(competencyCards.length).padStart(2,'0')}`;
-    competencyCards.forEach((card,i)=>card.classList.toggle('is-current',i===current));
-    competencyPrev.disabled=competencyRail.scrollLeft<=2;
-    competencyNext.disabled=competencyRail.scrollLeft>=max-2;
-  }
-  function moveCompetencies(direction){
-    competencyRail.scrollBy({left:direction*categoryStep(),behavior:slideBehavior()});
-    if(reduceMotion.matches)requestAnimationFrame(updateCompetencies);
-  }
-  competencyPrev.addEventListener('click',()=>moveCompetencies(-1));
-  competencyNext.addEventListener('click',()=>moveCompetencies(1));
-  competencyRail.addEventListener('scroll',()=>requestAnimationFrame(updateCompetencies),{passive:true});
-  competencyRail.addEventListener('keydown',e=>{
-    if(e.key==='ArrowRight'){e.preventDefault();moveCompetencies(1)}
-    if(e.key==='ArrowLeft'){e.preventDefault();moveCompetencies(-1)}
-  });
-  addMouseDrag(competencyRail);
-  window.addEventListener('resize',()=>{updateProjectUI();updateSkillsUI();updateCompetencies()},{passive:true});
-  updateProjectUI();updateSkillsUI();updateCompetencies();
-  if('IntersectionObserver' in window){
-    const reveal=new IntersectionObserver(entries=>{
-      for(const entry of entries)if(entry.isIntersecting){entry.target.classList.add('revealed');reveal.unobserve(entry.target)}
-    },{threshold:0.12});
-    document.querySelectorAll('.showcase-panel,.skills-showcase').forEach(section=>reveal.observe(section));
-  }
+    <section class="section-block" id="toolkit">
+      <div class="section-heading"><p class="section-index mono">04 / TECH STACK &amp; PRACTICE</p><h2>Tools behind <em>the builds.</em></h2><p>Programming, electronics, design, and troubleshooting skills gathered through academic projects and practical work.</p></div>
+      <div class="tool-rail-wrap card"><div class="tool-header mono"><span>TOOLS.TECHNOLOGIES</span><div><button class="rail-arrow" id="toolsPrev" aria-label="Scroll tools left">←</button><button class="rail-arrow" id="toolsNext" aria-label="Scroll tools right">→</button></div></div><div class="tools-rail" id="toolsRail" tabindex="0" aria-label="Tools and technologies, scroll horizontally"><div class="tool"><img src="assets/tool-logos/cplusplus.svg" alt="" loading="lazy"><span>C / C++</span></div><div class="tool"><img src="assets/tool-logos/arduino.svg" alt="" loading="lazy"><span>Arduino</span></div><div class="tool"><img src="assets/tool-logos/android-studio.svg" alt="" loading="lazy"><span>Android Studio</span></div><div class="tool"><img src="assets/tool-logos/html5.svg" alt="" loading="lazy"><span>HTML</span></div><div class="tool"><img src="assets/tool-logos/css3.svg" alt="" loading="lazy"><span>CSS</span></div><div class="tool"><img src="assets/tool-logos/javascript.svg" alt="" loading="lazy"><span>JavaScript</span></div><div class="tool"><img src="assets/tool-logos/github.svg" alt="" loading="lazy"><span>GitHub</span></div><div class="tool"><img src="assets/tool-logos/python.svg" alt="" loading="lazy"><span>Python</span></div><div class="tool"><img src="assets/tool-logos/java.svg" alt="" loading="lazy"><span>Java</span></div><div class="tool"><img src="assets/tool-logos/supabase.svg" alt="" loading="lazy"><span>Supabase</span></div><div class="tool"><img src="assets/tool-logos/mysql.svg" alt="" loading="lazy"><span>MySQL</span></div><div class="tool"><img src="assets/tool-logos/kotlin.svg" alt="" loading="lazy"><span>Kotlin</span></div></div></div>
+      <div class="skills-grid"><article class="skill-panel card"><div class="skill-panel-title"><span>01</span><h3>Hardware &amp; Electronics</h3></div><p>Computer hardware troubleshooting, PC assembly and maintenance, Arduino and ESP32, Raspberry Pi, circuit design and testing, microcontroller programming, sensors, actuators, and hardware–software integration.</p></article><article class="skill-panel card"><div class="skill-panel-title"><span>02</span><h3>Software &amp; Programming</h3></div><p>Software development, C/C++, object-oriented programming, web design, HTML, CSS, JavaScript, Android Studio, UI/UX, Arduino IDE, software troubleshooting, and project coordination.</p></article><article class="skill-panel card"><div class="skill-panel-title"><span>03</span><h3>Networking &amp; IT Support</h3></div><p>Computer networking, LAN configuration, network troubleshooting, Windows installation and configuration, PC technical support, and systems maintenance.</p></article></div>
+    </section>
 
-  // Expand real images in a navigable lightbox.
-  const gallery=[
-    ['assets/obstacle-robot.jpg','Smart Obstacle-Avoiding Robot','Prototype photograph'],
-    ['assets/medicare-front.jpg','MEDICARE — Main Prototype','Medicine reminder system'],
-    ['assets/medicare-inside.jpg','MEDICARE — Inside View','Electronic components and internal mechanism'],
-    ['assets/logitrack-screenshot.png','LogiTrack 1.0','Website screenshot'],
-    ['assets/sip-certificate.jpg','Science Investigatory Project','Certificate of Participation — Group ELNO']
-  ];
-  const viewer=document.getElementById('imageViewer');let index=0;
-  function showImage(i){index=(i+gallery.length)%gallery.length;const item=gallery[index];const img=document.getElementById('viewerImage');img.src=item[0];img.alt=item[1];document.getElementById('viewerTitle').textContent=item[1];document.getElementById('viewerCaption').textContent=item[2];document.getElementById('viewerCount').textContent=`${index+1} / ${gallery.length}`;document.getElementById('viewerOriginal').href=item[0]}
-  document.querySelectorAll('.gallery-trigger').forEach(link=>link.addEventListener('click',event=>{event.preventDefault();showImage(+link.dataset.index);if(!viewer.open){viewer.showModal();document.body.classList.add('viewer-open')}}));
-  document.getElementById('viewerClose').addEventListener('click',()=>viewer.close());
-  document.getElementById('viewerPrev').addEventListener('click',()=>showImage(index-1));
-  document.getElementById('viewerNext').addEventListener('click',()=>showImage(index+1));
-  viewer.addEventListener('click',event=>{if(event.target===viewer)viewer.close()});viewer.addEventListener('close',()=>document.body.classList.remove('viewer-open'));
-  document.addEventListener('keydown',event=>{if(viewer.open&&event.key==='ArrowLeft')showImage(index-1);if(viewer.open&&event.key==='ArrowRight')showImage(index+1)});
+    <section class="section-block" id="journey">
+      <div class="section-heading"><p class="section-index mono">05 / EXPERIENCE &amp; EDUCATION</p><h2>The path <em>behind the projects.</em></h2><p>Academic learning, technical leadership, and practical computer maintenance experience.</p></div>
+      <div class="journey-grid"><div class="journey-card card"><div class="journey-title"><svg class="ico"><use href="#i-work"/></svg><h3>Experience</h3></div><div class="timeline"><div><time>2021 — Present</time><strong>Technical Director</strong><p>Media &amp; Communication · River of Life Methodist Church</p></div><div><time>2024 — Present</time><strong>Freelance PC Assembly &amp; Maintenance</strong><p>Technical support · Taytay, Rizal</p></div><div><time>2025</time><strong>Hardware–Software Integration Engineer</strong><p>Academic Embedded Systems Project · ICCT Colleges</p></div><div><time>2025</time><strong>Project Manager</strong><p>Object-Oriented Programming Project · ICCT Colleges</p></div><div><time>2024</time><strong>Project Manager</strong><p>Science Investigatory Project · ICCT Colleges</p></div><div><time>2023</time><strong>Visual Designer</strong><p>Senior High School Work Immersion · Taytay Senior High School</p></div></div></div><div class="journey-right"><div class="journey-card card"><div class="journey-title"><svg class="ico"><use href="#i-school"/></svg><h3>Education</h3></div><div class="timeline"><div><time>2023 — 2027 (expected)</time><strong>BS Computer Engineering</strong><p>ICCT Colleges</p></div><div><time>2022 — 2023</time><strong>Senior High School — ICT</strong><p>Taytay Senior High School</p></div><div><time>Secondary Education</time><strong>Junior High School</strong><p>Taytay National High School</p></div></div></div><div class="award-card card"><div><p class="section-index mono">RECOGNITION.LOG</p><h3>Science Investigatory Project — Top 15</h3><p>Certificate presented to group ELNO for participation in the Top 15 at Bato-Balani Version 2.0, March 2024.</p><a class="case-link gallery-open" href="assets/documents/sip-certificate.jpg" data-gallery="4">View certificate <svg class="ico"><use href="#i-expand"/></svg></a></div><a href="assets/documents/sip-certificate.jpg" data-gallery="4" class="gallery-open award-thumb" aria-label="View Science Investigatory Project certificate"><img src="assets/documents/sip-certificate.jpg" alt="Top 15 SIP certificate of participation for group ELNO" loading="lazy"></a></div></div></div>
+    </section>
 
-  // Highlight visible section, without hiding navigation labels.
-  const nav=[...document.querySelectorAll('.side-nav a')];
-  if('IntersectionObserver' in window){const observer=new IntersectionObserver(entries=>{for(const entry of entries){if(entry.isIntersecting){nav.forEach(a=>{const active=a.getAttribute('href')==='#'+entry.target.id;a.classList.toggle('active',active);if(active)a.setAttribute('aria-current','location');else a.removeAttribute('aria-current')})}}},{rootMargin:'-20% 0px -60% 0px',threshold:0});document.querySelectorAll('main section[id]').forEach(section=>observer.observe(section))}
-  nav.forEach(link=>link.addEventListener('click',()=>{nav.forEach(a=>a.classList.remove('active'));link.classList.add('active')}));
-})();
-</script>
+    <section class="section-block" id="github">
+      <div class="section-heading"><p class="section-index mono">06 / GITHUB SIGNAL</p><h2>Work in <em>the open.</em></h2><p>Explore my repositories and current public development activity directly on GitHub.</p></div>
+      <div class="github-panel card"><div class="github-intro"><div class="github-symbol"><svg class="ico fill"><use href="#i-github"/></svg></div><div><span class="mono section-index">GITHUB.PROFILE</span><h3>urmarkiee</h3><p>Source code, learning projects, and ongoing experiments.</p></div></div><div class="github-live"><div class="github-metrics"><div><small class="mono">PUBLIC REPOS</small><strong id="repoCount">—</strong></div><div><small class="mono">FOLLOWERS</small><strong id="followerCount">—</strong></div><div><small class="mono">DATA SOURCE</small><strong id="githubStatus">Checking…</strong></div></div><p id="githubNote" class="github-note">Public profile statistics are loaded from GitHub when the connection is available.</p></div><a class="btn btn-main" href="https://github.com/urmarkiee" rel="noopener noreferrer" target="_blank">Open GitHub profile <svg class="ico"><use href="#i-arrow"/></svg></a></div>
+    </section>
+
+    <section class="section-block contact-section" id="contact">
+      <div class="section-heading"><p class="section-index mono">07 / CONTACT.PORTAL</p><h2>Let's build <em>something useful.</em></h2><p>Interested in a software project, hardware prototype, or technical collaboration? Here's how to reach me.</p></div>
+      <div class="contact-grid"><div class="contact-profile card"><span class="small-label mono">CONTACT.STATUS</span><div class="contact-status"><i class="led"></i> Open to learning opportunities &amp; collaboration</div><a class="contact-option" href="mailto:sarmientomark936@gmail.com"><svg class="ico"><use href="#i-mail"/></svg><span><small>EMAIL</small><strong>sarmientomark936@gmail.com</strong></span><svg class="ico arrow"><use href="#i-arrow"/></svg></a><a class="contact-option" href="tel:+639851289519"><svg class="ico"><use href="#i-phone"/></svg><span><small>PHONE</small><strong>0985 128 9519</strong></span><svg class="ico arrow"><use href="#i-arrow"/></svg></a><div class="contact-option static"><svg class="ico"><use href="#i-map"/></svg><span><small>LOCATION</small><strong>Taytay, Rizal, Philippines</strong></span></div><a class="resume-inline" href="assets/documents/mark-allen-resume.png" target="_blank" rel="noopener">View résumé <svg class="ico"><use href="#i-arrow"/></svg></a></div><div class="inquiry-panel card"><div class="card-terminal mono">NEW.INQUIRY <span>CHOOSE A TOPIC</span></div><h3>What would you like to discuss?</h3><div class="inquiry-options"><button class="inquiry-option" data-inquiry="Web or software project"><svg class="ico"><use href="#i-code"/></svg><span><strong>Web / Software Project</strong><small>Interfaces, applications, or collaboration</small></span><svg class="ico arrow"><use href="#i-arrow"/></svg></button><button class="inquiry-option" data-inquiry="Hardware or electronics prototype"><svg class="ico"><use href="#i-cpu"/></svg><span><strong>Hardware Prototype</strong><small>Microcontrollers, electronics, and integration</small></span><svg class="ico arrow"><use href="#i-arrow"/></svg></button><button class="inquiry-option" data-inquiry="PC repair or technical support"><svg class="ico"><use href="#i-settings"/></svg><span><strong>Technical Support</strong><small>Computer maintenance and troubleshooting</small></span><svg class="ico arrow"><use href="#i-arrow"/></svg></button><button class="inquiry-option" data-inquiry="General portfolio inquiry"><svg class="ico"><use href="#i-mail"/></svg><span><strong>General Inquiry</strong><small>Questions, academic projects, or opportunities</small></span><svg class="ico arrow"><use href="#i-arrow"/></svg></button></div><p class="inquiry-foot">Selecting an option opens your email app with a suggested subject. Nothing is sent automatically.</p></div></div>
+    </section>
+  </main>
+  <footer class="site-footer"><div class="page-container footer-inner"><a class="wordmark footer-mark" href="#home"><span class="mark">MA<span class="mark-point">/</span></span><span class="wordmark-text">markallen<span class="dim">://desk</span></span></a><nav aria-label="Footer"><a href="#about">About</a><a href="#toolkit">Skills</a><a href="#projects">Projects</a><a href="#contact">Contact</a></nav><small>© <span id="year">2026</span> Mark Allen Sarmiento</small></div></footer>
+
+  <dialog class="gallery-dialog" id="gallery" aria-labelledby="galleryTitle"><div class="gallery-inner"><div class="gallery-header"><div><span class="mono tiny">IMAGE.INSPECTOR <span id="galleryCount"></span></span><h2 id="galleryTitle">Project image</h2></div><button class="gallery-close" id="galleryClose" aria-label="Close image viewer">✕</button></div><div class="gallery-stage"><button id="galleryPrev" class="gallery-arrow" aria-label="Previous image">❮</button><img id="galleryImage" src="" alt=""><button id="galleryNext" class="gallery-arrow" aria-label="Next image">❯</button></div><div class="gallery-bottom"><p id="galleryCaption"></p><a id="galleryOriginal" target="_blank" rel="noopener" href="#">Open full image <svg class="ico"><use href="#i-arrow"/></svg></a></div></div></dialog>
+
+  <svg xmlns="http://www.w3.org/2000/svg" class="svg-defs" aria-hidden="true">
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14m-6-6 6 6-6 6"/></symbol>
+    <symbol id="i-code" viewBox="0 0 24 24"><path d="m8 4-7 8 7 8m8-16 7 8-7 8m-3-19-2 22"/></symbol>
+    <symbol id="i-cpu" viewBox="0 0 24 24"><rect x="5" y="5" width="14" height="14" rx="2"/><rect x="9" y="9" width="6" height="6"/><path d="M9 1v4m6-4v4M9 19v4m6-4v4M1 9h4m-4 6h4m14-6h4m-4 6h4"/></symbol>
+    <symbol id="i-settings" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M10 2h4l1 3 3 1 3-1 2 4-2 2v2l2 2-2 4-3-1-3 1-1 3h-4l-1-3-3-1-3 1-2-4 2-2v-2L1 9l2-4 3 1 3-1z"/></symbol>
+    <symbol id="i-map" viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="2.5"/></symbol>
+    <symbol id="i-mail" viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="m3 7 9 7 9-7"/></symbol>
+    <symbol id="i-phone" viewBox="0 0 24 24"><path d="M5 2h5l1 5-3 2a18 18 0 0 0 7 7l2-3 5 1v5c0 3-5 4-11-1S1 6 5 2z"/></symbol>
+    <symbol id="i-search" viewBox="0 0 24 24"><circle cx="10" cy="10" r="7"/><path d="m15 15 7 7"/></symbol>
+    <symbol id="i-layers" viewBox="0 0 24 24"><path d="m12 2 10 6-10 6L2 8zM2 13l10 6 10-6M2 18l10 5 10-5"/></symbol>
+    <symbol id="i-link" viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 8 .5l3-3a5 5 0 0 0-7-7l-2 2M14 11a5 5 0 0 0-8-.5l-3 3a5 5 0 0 0 7 7l2-2"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12 5 5L20 7"/></symbol>
+    <symbol id="i-rocket" viewBox="0 0 24 24"><path d="M12 16C9 13 6 9 8 6c3-4 8-5 13-5 0 5-1 10-5 13-3 2-7-1-10-4zM7 17l-4 4 5-1 1-4M4 9l-2 5 4-1"/><circle cx="15" cy="7" r="2"/></symbol>
+    <symbol id="i-expand" viewBox="0 0 24 24"><path d="M15 3h6v6m0-6-8 8M9 21H3v-6m0 6 8-8"/></symbol>
+    <symbol id="i-school" viewBox="0 0 24 24"><path d="m2 9 10-6 10 6-10 6zM5 13v6c5 4 9 4 14 0v-6"/></symbol>
+    <symbol id="i-work" viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M8 7V4h8v3M2 13h20"/></symbol>
+    <symbol id="i-sliders" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/><circle cx="8" cy="6" r="2"/><circle cx="16" cy="12" r="2"/><circle cx="10" cy="18" r="2"/></symbol>
+    <symbol id="i-menu" viewBox="0 0 24 24"><path d="M3 6h18M3 12h18M3 18h18"/></symbol>
+    <symbol id="i-play" viewBox="0 0 24 24"><path d="m8 5 12 7-12 7z"/></symbol>
+    <symbol id="i-pause" viewBox="0 0 24 24"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></symbol>
+    <symbol id="i-github" viewBox="0 0 16 16"><path fill="currentColor" stroke="none" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.65 7.65 0 0 1 2-.27c.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></symbol>
+  </svg>
 </body>
 </html>
