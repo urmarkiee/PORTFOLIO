@@ -63,9 +63,99 @@ many('a[href="#home"]').forEach(link=>link.addEventListener('click',event=>{
 }));
 updateActiveSection();
 
-// Case file category filter
+// Accessible, touch-native featured-project carousel + category filtering.
 const filters=many('.filter-button'),cases=many('.case-card');
-filters.forEach(btn=>btn.addEventListener('click',()=>{const category=btn.dataset.filter;filters.forEach(b=>{const selected=b===btn;b.classList.toggle('is-active',selected);b.setAttribute('aria-pressed',String(selected))});let count=0;cases.forEach(card=>{const display=category==='all'||card.dataset.category===category;card.hidden=!display;if(display)count++});one('#filterEmpty').hidden=count>0}));
+const projectRail=one('#caseGrid');
+const projectPrev=one('#projectsPrev'),projectNext=one('#projectsNext');
+const projectDots=one('#projectDots'),projectCounter=one('#projectCounter');
+const projectProgress=one('#projectProgress');
+let shownProjects=cases.slice();
+let activeProject=0;
+const reduceMotion=()=>window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const projectName=card=>card.querySelector('h3')?.textContent.trim()||'Project';
+function closestProject(){
+  if(!shownProjects.length)return 0;
+  const railStart=projectRail.scrollLeft;
+  const firstOffset=shownProjects[0].offsetLeft;
+  let index=0,distance=Infinity;
+  shownProjects.forEach((card,i)=>{
+    const left=card.offsetLeft-firstOffset;
+    const d=Math.abs(left-railStart);
+    if(d<distance){index=i;distance=d}
+  });
+  return index;
+}
+function renderProjectNav(){
+  activeProject=Math.min(Math.max(activeProject,0),Math.max(0,shownProjects.length-1));
+  const total=shownProjects.length;
+  projectCounter.textContent=total?`${String(activeProject+1).padStart(2,'0')} / ${String(total).padStart(2,'0')}`:'00 / 00';
+  projectPrev.disabled=!total||activeProject===0;
+  projectNext.disabled=!total||activeProject===total-1;
+  projectProgress.style.width=total?`${(activeProject+1)/total*100}%`:'0%';
+  cases.forEach(card=>card.classList.toggle('is-current',shownProjects[activeProject]===card));
+  const dots=Array.from(projectDots.children);
+  dots.forEach((button,i)=>{
+    const selected=i===activeProject;
+    button.setAttribute('aria-current',selected?'true':'false');
+    button.setAttribute('aria-pressed',String(selected));
+  });
+}
+function jumpToProject(index,immediate=false){
+  if(!shownProjects.length)return;
+  const next=Math.max(0,Math.min(index,shownProjects.length-1));
+  activeProject=next;
+  const target=shownProjects[next];
+  const left=target.offsetLeft-shownProjects[0].offsetLeft;
+  projectRail.scrollTo({left:Math.max(0,left),behavior:immediate||reduceMotion()?'instant':'smooth'});
+  renderProjectNav();
+}
+function rebuildProjectNav(){
+  shownProjects=cases.filter(card=>!card.hidden);
+  projectDots.replaceChildren();
+  shownProjects.forEach((card,i)=>{
+    const dot=document.createElement('button');
+    dot.type='button';dot.className='project-dot';
+    dot.setAttribute('aria-label',`View project ${i+1}: ${projectName(card)}`);
+    dot.addEventListener('click',()=>jumpToProject(i));
+    projectDots.append(dot);
+  });
+  activeProject=0;
+  projectRail.scrollTo({left:0,behavior:'instant'});
+  renderProjectNav();
+}
+filters.forEach(btn=>btn.addEventListener('click',()=>{
+  const category=btn.dataset.filter;
+  filters.forEach(other=>{
+    const selected=other===btn;
+    other.classList.toggle('is-active',selected);
+    other.setAttribute('aria-pressed',String(selected));
+  });
+  cases.forEach(card=>card.hidden=!(category==='all'||card.dataset.category===category));
+  one('#filterEmpty').hidden=cases.some(card=>!card.hidden);
+  rebuildProjectNav();
+}));
+projectPrev.addEventListener('click',()=>jumpToProject(activeProject-1));
+projectNext.addEventListener('click',()=>jumpToProject(activeProject+1));
+projectRail.addEventListener('keydown',e=>{
+  if(e.target!==projectRail)return;
+  if(e.key==='ArrowRight'){e.preventDefault();jumpToProject(activeProject+1)}
+  if(e.key==='ArrowLeft'){e.preventDefault();jumpToProject(activeProject-1)}
+});
+let projectScrollRaf=false;
+projectRail.addEventListener('scroll',()=>{
+  if(projectScrollRaf)return;
+  projectScrollRaf=true;
+  requestAnimationFrame(()=>{
+    projectScrollRaf=false;
+    activeProject=closestProject();
+    renderProjectNav();
+  });
+},{passive:true});
+window.addEventListener('resize',()=>{
+  if(!shownProjects.length)return;
+  activeProject=closestProject();renderProjectNav();
+},{passive:true});
+rebuildProjectNav();
 
 // Horizontally swipeable technology rail
 const rail=one('#toolsRail');function scrollRail(factor){rail.scrollBy({left:factor*345,behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth'})}
