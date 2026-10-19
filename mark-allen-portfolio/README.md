@@ -41,3 +41,9 @@ Synced N — Church Ministry Management appears as CASE 04. The project highligh
 Upload the contents of this folder to the root of a GitHub repository, then in Settings → Pages choose `Deploy from a branch` and select the main branch and `/ (root)` folder.
 
 The font system has fallbacks if the optional Google Fonts stylesheet is unavailable. All project images, audio, PDFs, and icons are bundled locally; only live GitHub statistics require an internet connection.
+
+## Mobile optimization (October 2026)
+
+The desktop appearance has been retained. The site now has an intentionally stacked hero on smaller tablets, scaled profile photo card, mobile-friendly project cards, adjustable section headings, flexible contact layouts, scrollable project filters and tool icons, and at least 44px touch targets on primary menu controls. The ambiance panel stays within the viewport and its contents scroll on small screens. The full-screen image viewer sizes its images for narrow phone displays.
+
+Browser layout checks were run with an inlined local build at CSS viewport widths 320, 360, 375, 390, 430, 600, 680, 700, 768, 820, 860, 920, 1024, and 1440px. No page-wide horizontal overflow or page JavaScript exceptions were observed. The mobile menu, ambiance theme, app project filter, gallery, photo switch, and tech-strip controls responded to automated interaction tests. Actual device testing is still recommended.
