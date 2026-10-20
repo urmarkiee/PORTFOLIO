@@ -62,6 +62,53 @@ Update: The hero Get in touch button now scrolls directly to the NEW.INQUIRY top
 
 An Android educational game project for Computer Studies students, with beginner-friendly challenges, learning levels, quizzes, achievements, and progress tracking. The portfolio includes clickable welcome and dashboard screenshots.
 
-## ByteQuest live website
+## ByteQuest developer role and live website
 
-The ByteQuest project card includes a **Visit ByteQuest Website** button that opens https://urmarkiee.github.io/ByteQuest_Web/ in a new browser tab. The welcome/dashboard image gallery remains available.
+**My role:** Android Game Developer and Website Developer, credited as **MR.DEV**. Responsibilities represented in the portfolio include the Android learning-game interface, quizzes and levels, dashboard, and companion website. The project card and Recent Work section both display this role.
+
+
+The ByteQuest project card includes an **Open ByteQuest Website** button that opens https://urmarkiee.github.io/ByteQuest_Web/ in a new browser tab. The welcome/dashboard image gallery remains available.
+
+## October 2026 — Recent work refresh
+
+The updated portfolio now includes a **Recent Work / 2026** section with concise cards, expandable development details, and direct project links. The original **five** featured projects and their horizontal, swipeable carousel remain in place; CHENTER is intentionally **not** included among the portfolio projects.
+
+### 1. ByteQuest — Computer Studies Adventure
+
+- Android educational puzzle/quiz game, presented under the **MR.DEV** developer credit.
+- Seven Computer Studies subjects with 50 questions per subject, **350 practice questions** total; **40 core puzzles** are described on the public project website.
+- Beginner-oriented lessons, binary and digital-logic challenges, quizzes, XP, progress tracking, and achievements.
+- Companion GitHub Pages site: https://urmarkiee.github.io/ByteQuest_Web/
+- The public site is live and links to Android release information. A published website does not itself confirm that a particular APK is available at all times.
+
+### 2. Synced N — Church Ministry Management
+
+- **Status: Under Development.** Roles: **Frontend Developer** and **System Analyst**.
+- Member/admin-leader workflows, welcome/sign-in screens, announcements, songs, and team coordination.
+- Lyrics/chords display with transpose, vocalist/instrumentalist views, metronome, adjustable auto-scroll speed 1–10, Start/Pause, font limits, and pasted-sheet arrangement.
+- UI and navigation refinements are ongoing; device/build testing is not claimed complete.
+
+### 3. LogiTrack 1.0 — Logistics Tracking
+
+- Published responsive website: https://urmarkiee.github.io/LogiTrack1.0/
+- Shipment lookup, delivery milestones, last-reported location, and customer-facing tracking interface.
+- Broader Supabase-backed development covers administrator, customer, and courier roles; authentication, shipment history, courier approvals, dashboards, and location sharing.
+- **Important:** Some of the broader platform features are ongoing work. The published site describes *reported* coordinates, not independent GPS tracking of a parcel.
+
+### 4. MEDICARE — Medicine Reminder
+
+- ESP32 controller with six configurable reminders, DS3231 RTC, I²C LCD, servo-controlled tray, IR sensor, buzzer/LED alerts, and RF-linked notification receiver.
+- Project schematic and code documents remain included in `assets/documents/`.
+
+### 5. Smart Obstacle-Avoiding Robot
+
+- Arduino Uno, ultrasonic sensing, motor driver, servo, and robotic chassis for obstacle response.
+
+### Other site changes
+
+- Expanded each existing project breakdown with technical specifics, recent contributions, and clear status wording.
+- Updated the hero, technical skills, and experience timeline to reflect recent Android, web, cloud, and embedded development.
+- Added an **Updates** link to desktop/mobile navigation and a **Recent work** footer link.
+- Preserved compact design, theme/music settings, mobile navigation, image gallery, portrait switching, existing contact behavior, and NEW.INQUIRY anchor.
+
+The project descriptions are based on user-supplied project history and the two published project sites. Work-in-progress items are explicitly labeled rather than described as fully deployed.

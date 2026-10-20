@@ -219,3 +219,16 @@ if(profileToggle&&profileImage){
     setTimeout(()=>profileToggle.classList.remove('profile-animate'),600);
   });
 }
+
+// Jump from the recent-work log to the exact case in the existing project carousel.
+document.querySelectorAll('[data-project-jump]').forEach(link=>link.addEventListener('click',()=>{
+  const index=Number(link.dataset.projectJump);
+  const allFilter=document.querySelector('.filter-button[data-filter="all"]');
+  if(allFilter&&!allFilter.classList.contains('is-active'))allFilter.click();
+  requestAnimationFrame(()=>setTimeout(()=>{
+    const cards=Array.from(document.querySelectorAll('.case-card:not([hidden])'));
+    const rail=document.querySelector('#caseGrid');
+    const target=cards[index];
+    if(rail&&target&&cards[0])rail.scrollTo({left:target.offsetLeft-cards[0].offsetLeft,behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth'});
+  },100));
+}));
