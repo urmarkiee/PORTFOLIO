@@ -1,0 +1,2 @@
+Font Awesome Free Brands vector glyphs: Fonticons, Inc. (CC BY 4.0). https://fontawesome.com/license/free
+Additional SVG marks are locally bundled stylized depictions for project demonstration.
