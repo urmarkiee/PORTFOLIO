@@ -168,7 +168,7 @@ const galleryData=[
  {src:'assets/projects/medicare-front.jpg',title:'MEDICARE — Front View',caption:'Medicine reminder prototype with display and buttons.'},
  {src:'assets/projects/medicare-inside.jpg',title:'MEDICARE — Interior View',caption:'Internal electronic components and mechanical assembly.'},
  {src:'assets/projects/logitrack.png',title:'LogiTrack 1.0',caption:'Logistics tracking website screenshot.'},
- {src:'assets/documents/sip-certificate.jpg',title:'SIP — Certificate of Participation',caption:'Team ELNO — Top 15, Bato-Balani Version 2.0.'},
+ {src:'assets/documents/sip-certificate.jpg',title:'SIP — Certificate of Participation',caption:'Team ELNO — Top 15, Bato-Balani Version 2.0, March 13, 2024. Signatures blurred for public viewing.'},
  {src:'assets/projects/synced-n-welcome.jpg',title:'Synced N — Welcome Screen',caption:'Get Started interface for the Synced N church ministry management application.'},
  {src:'assets/projects/synced-n-login.jpg',title:'Synced N — Sign In Screen',caption:'Email or mobile number and password interface with a Google sign-in option.'},
  {src:'assets/projects/bytequest-welcome.jpg',title:'ByteQuest — Welcome Screen',caption:'Computer Studies Adventure welcome screen with Start Adventure.'},
@@ -232,3 +232,32 @@ document.querySelectorAll('[data-project-jump]').forEach(link=>link.addEventList
     if(rail&&target&&cards[0])rail.scrollTo({left:target.offsetLeft-cards[0].offsetLeft,behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth'});
   },100));
 }));
+
+// Compact experience disclosure: retains all older roles without a long default page.
+const experienceButton=document.querySelector('[data-toggle-experience]');
+if(experienceButton){
+  const olderRoles=Array.from(document.querySelectorAll('.experience-extra'));
+  experienceButton.addEventListener('click',()=>{
+    const opening=experienceButton.getAttribute('aria-expanded')!=='true';
+    olderRoles.forEach(item=>{item.hidden=!opening;});
+    experienceButton.setAttribute('aria-expanded',String(opening));
+    experienceButton.textContent=opening?'View Less Experience':'View More Experience';
+  });
+}
+
+// Lightweight floating geometry: can be switched off and always respects reduced-motion.
+const floatingField=one('#floatingField');
+const motionToggle=one('#floatingMotionToggle');
+const motionLabel=one('#floatingMotionLabel');
+if(floatingField && motionToggle && motionLabel){
+  const setFloatingMotion=(enabled)=>{
+    floatingField.classList.toggle('floating-paused',!enabled);
+    motionToggle.setAttribute('aria-pressed',String(enabled));
+    motionToggle.setAttribute('aria-label',enabled?'Turn off floating background objects':'Turn on floating background objects');
+    motionLabel.textContent=enabled?'Floating motion on':'Floating motion off';
+    motionToggle.querySelector('.motion-switch-state').textContent=enabled?'ON':'OFF';
+    safeStore.write('portfolio-floating-motion',enabled?'on':'off');
+  };
+  setFloatingMotion(safeStore.read('portfolio-floating-motion')!=='off');
+  motionToggle.addEventListener('click',()=>setFloatingMotion(motionToggle.getAttribute('aria-pressed')!=='true'));
+}
